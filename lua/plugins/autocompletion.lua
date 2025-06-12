@@ -72,7 +72,7 @@ return {
         ['<C-b>'] = cmp.mapping.scroll_docs(-4), -- Прокрутка доков вверх
         ['<C-f>'] = cmp.mapping.scroll_docs(4), -- Прокрутка доков вниз
         ['<C-y>'] = cmp.mapping.confirm { select = true }, -- Подтвердить выбор
-        ['<C-Space>'] = cmp.mapping.complete {}, -- Принудительный вызов автодополнения
+        ['<A-CR>'] = cmp.mapping.complete {}, -- Принудительный вызов автодополнения
 
         -- Навигация внутри сниппетов:
         ['<C-l>'] = cmp.mapping(function()

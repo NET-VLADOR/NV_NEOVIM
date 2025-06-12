@@ -19,6 +19,14 @@ return {
   {
     -- Подсказки клавиатурных сочетаний
     'folke/which-key.nvim',
+    config = function()
+      require('which-key').setup {
+        preset = 'modern',
+        icons = {
+          mappings = false,
+        },
+      }
+    end,
   },
   {
     -- Автозакрытие скобок, кавычек и тегов
@@ -40,5 +48,10 @@ return {
     config = function()
       require('colorizer').setup()
     end,
+  },
+  {
+    -- Плавная прокрутка
+    'karb94/neoscroll.nvim',
+    opts = {},
   },
 }

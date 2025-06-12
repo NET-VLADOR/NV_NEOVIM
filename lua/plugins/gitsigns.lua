@@ -16,4 +16,10 @@ return {
       changedelete = { text = '~' },
     },
   },
+  vim.keymap.set(
+    'n',
+    '<leader>gh',
+    ':Gitsigns preview_hunk_inline<CR>',
+    { noremap = true, silent = true, desc = 'Gitsigns: показать изменения Git' }
+  ),
 }

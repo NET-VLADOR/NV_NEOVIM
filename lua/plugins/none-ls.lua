@@ -31,11 +31,6 @@ return {
       formatting.shfmt.with { -- Форматтер shell-скриптов
         args = { '-i', '4' }, -- Использовать 4 пробела для отступов
       },
-      formatting.terraform_fmt, -- Форматтер для Terraform
-      require('none-ls.formatting.ruff').with { -- Форматирование Python через ruff
-        extra_args = { '--extend-select', 'I' }, -- Дополнительные аргументы
-      },
-      require 'none-ls.formatting.ruff_format', -- Форматирование Python (альтернатива)
     }
 
     -- Группа автокоманд для автоматического форматирования
