@@ -5,7 +5,7 @@ return {
 		'nvim-lua/plenary.nvim',
 		'nvim-tree/nvim-web-devicons',
 		'MunifTanjim/nui.nvim',
-		'3rd/image.nvim', -- Optional image support in preview window: See `# Preview Mode` for more information
+		'3rd/image.nvim', -- Опциональная поддержка изображений в окне предпросмотра: см. `# Preview Mode` подробнее
 		{
 			's1n7ax/nvim-window-picker',
 			version = '2.*',
@@ -14,11 +14,11 @@ return {
 					filter_rules = {
 						include_current_win = false,
 						autoselect_one = true,
-						-- filter using buffer options
+						-- фильтрация с использованием параметров буфера
 						bo = {
-							-- if the file type is one of following, the window will be ignored
+							-- игнорировать окна с указанными типами файлов
 							filetype = { 'neo-tree', 'neo-tree-popup', 'notify' },
-							-- if the buffer type is one of following, the window will be ignored
+							-- игнорировать окна с указанными типами буферов
 							buftype = { 'terminal', 'quickfix' },
 						},
 					},
@@ -27,42 +27,42 @@ return {
 		},
 	},
 	config = function()
-		-- If you want icons for diagnostic errors, you'll need to define them somewhere:
+		-- Определение значков для диагностических ошибок:
 		vim.fn.sign_define('DiagnosticSignError', { text = ' ', texthl = 'DiagnosticSignError' })
 		vim.fn.sign_define('DiagnosticSignWarn', { text = ' ', texthl = 'DiagnosticSignWarn' })
 		vim.fn.sign_define('DiagnosticSignInfo', { text = ' ', texthl = 'DiagnosticSignInfo' })
 		vim.fn.sign_define('DiagnosticSignHint', { text = '󰌵', texthl = 'DiagnosticSignHint' })
 
 		require('neo-tree').setup {
-			close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+			close_if_last_window = false, -- Закрывать Neo-tree, если это последнее окно во вкладке
 			popup_border_style = 'rounded',
 			enable_git_status = true,
 			enable_diagnostics = true,
-			-- enable_normal_mode_for_inputs = false,                             -- Enable normal mode for input dialogs.
-			open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' }, -- when opening files, do not use windows containing these filetypes or buftypes
-			sort_case_insensitive = false,                            -- used when sorting files and directories in the tree
-			sort_function = nil,                                      -- use a custom function for sorting files and directories in the tree
+			-- enable_normal_mode_for_inputs = false,                             -- Включать нормальный режим для диалогов ввода
+			open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' }, -- Не заменять окна с указанными типами файлов
+			sort_case_insensitive = false, -- Сортировка без учета регистра
+			sort_function = nil, -- Кастомная функция сортировки
 			-- sort_function = function (a,b)
 			--       if a.type == b.type then
 			--           return a.path > b.path
 			--       else
 			--           return a.type > b.type
 			--       end
-			--   end , -- this sorts files and directories descendantly
+			--   end , -- сортировка файлов и директорий по убыванию
 			default_component_configs = {
 				container = {
 					enable_character_fade = true,
 				},
 				indent = {
 					indent_size = 2,
-					padding = 1, -- extra padding on left hand side
-					-- indent guides
+					padding = 1, -- Дополнительный отступ слева
+					-- Настройки линий отступов
 					with_markers = true,
 					indent_marker = '│',
 					last_indent_marker = '└',
 					highlight = 'NeoTreeIndentMarker',
-					-- expander config, needed for nesting files
-					with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
+					-- Настройки для вложенных файлов
+					with_expanders = nil, -- Если nil и включено вложение файлов, будут включены экспандеры
 					expander_collapsed = '',
 					expander_expanded = '',
 					expander_highlight = 'NeoTreeExpander',
@@ -71,8 +71,7 @@ return {
 					folder_closed = '',
 					folder_open = '',
 					folder_empty = '󰜌',
-					-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
-					-- then these will never be used.
+					-- Эти настройки используются, если не заданы иконки в nvim-web-devicons
 					default = '*',
 					highlight = 'NeoTreeFileIcon',
 				},
@@ -87,12 +86,12 @@ return {
 				},
 				git_status = {
 					symbols = {
-						-- Change type
-						added = '', -- or "✚", but this is redundant info if you use git_status_colors on the name
-						modified = '', -- or "", but this is redundant info if you use git_status_colors on the name
-						deleted = '✖', -- this can only be used in the git_status source
-						renamed = '󰁕', -- this can only be used in the git_status source
-						-- Status type
+						-- Типы изменений
+						added = '', -- Или "✚"
+						modified = '', -- Или ""
+						deleted = '✖️', -- Только для источника git_status
+						renamed = '󰁕', -- Только для источника git_status
+						-- Статусы
 						untracked = '',
 						ignored = '',
 						unstaged = '󰄱',
@@ -100,30 +99,28 @@ return {
 						conflict = '',
 					},
 				},
-				-- If you don't want to use these columns, you can set `enabled = false` for each of them individually
+				-- Отключение колонок установкой `enabled = false`
 				file_size = {
 					enabled = true,
-					required_width = 64, -- min width of window required to show this column
+					required_width = 64, -- Минимальная ширина окна для отображения
 				},
 				type = {
 					enabled = true,
-					required_width = 122, -- min width of window required to show this column
+					required_width = 122,
 				},
 				last_modified = {
 					enabled = true,
-					required_width = 88, -- min width of window required to show this column
+					required_width = 88,
 				},
 				created = {
 					enabled = true,
-					required_width = 110, -- min width of window required to show this column
+					required_width = 110,
 				},
 				symlink_target = {
 					enabled = false,
 				},
 			},
-			-- A list of functions, each representing a global custom command
-			-- that will be available in all sources (if not overridden in `opts[source_name].commands`)
-			-- see `:h neo-tree-custom-commands-global`
+			-- Глобальные кастомные команды
 			commands = {},
 			window = {
 				position = 'left',
@@ -132,67 +129,58 @@ return {
 					noremap = true,
 					nowait = true,
 				},
+				-- ГЛОБАЛЬНЫЕ ГОРЯЧИЕ КЛАВИШИ (работают во всех источниках) --
 				mappings = {
-					['<space>'] = {
+					['<space>'] = { -- Переключить папку/файл
 						'toggle_node',
-						nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
+						nowait = false, -- Отключить `nowait` при конфликтах комбинаций
 					},
-					['<2-LeftMouse>'] = 'open',
-					['<cr>'] = 'open',
-					['<esc>'] = 'cancel', -- close preview or floating neo-tree window
-					['P'] = { 'toggle_preview', config = { use_float = true } },
-					['l'] = 'open',
-					['S'] = 'open_split',
-					['s'] = 'open_vsplit',
-					-- ["S"] = "split_with_window_picker",
-					-- ["s"] = "vsplit_with_window_picker",
-					['t'] = 'open_tabnew',
-					-- ["<cr>"] = "open_drop",
-					-- ["t"] = "open_tab_drop",
-					['w'] = 'open_with_window_picker',
-					--["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
-					['C'] = 'close_node',
-					-- ['C'] = 'close_all_subnodes',
-					['z'] = 'close_all_nodes',
-					--["Z"] = "expand_all_nodes",
-					['a'] = {
+					['<2-LeftMouse>'] = 'open', -- Открыть двойным кликом
+					['<cr>'] = 'open', -- Открыть по Enter
+					['<esc>'] = 'cancel', -- Закрыть предпросмотр или плавающее окно
+					['P'] = { 'toggle_preview', config = { use_float = true } }, -- Предпросмотр с плавающим окном
+					['l'] = 'open', -- Открыть элемент
+					['S'] = 'open_split', -- Открыть в горизонтальном разделении
+					['s'] = 'open_vsplit', -- Открыть в вертикальном разделении
+					-- ["S"] = "split_with_window_picker",  -- Альтернатива с выбором окна
+					-- ["s"] = "vsplit_with_window_picker", -- Альтернатива с выбором окна
+					['t'] = 'open_tabnew', -- Открыть в новой вкладке
+					-- ["<cr>"] = "open_drop",         -- Открыть с выпадением (deprecated)
+					-- ["t"] = "open_tab_drop",        -- Открыть в новой вкладке с выпадением (deprecated)
+					['w'] = 'open_with_window_picker', -- Открыть с выбором окна
+					['C'] = 'close_node', -- Закрыть текущий узел
+					['z'] = 'close_all_nodes', -- Свернуть все узлы
+					['a'] = { -- Добавить файл/папку
 						'add',
-						-- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
-						-- some commands may take optional config options, see `:h neo-tree-mappings` for details
+						-- Поддержка шаблонов в стиле BASH: "x{a,b,c}" -> xa,xb,xc
 						config = {
 							show_path = 'none', -- "none", "relative", "absolute"
 						},
 					},
-					['A'] = 'add_directory', -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
-					['d'] = 'delete',
-					['r'] = 'rename',
-					['y'] = 'copy_to_clipboard',
-					['x'] = 'cut_to_clipboard',
-					['p'] = 'paste_from_clipboard',
-					['c'] = 'copy', -- takes text input for destination, also accepts the optional config.show_path option like "add":
-					-- ["c"] = {
-					--  "copy",
-					--  config = {
-					--    show_path = "none" -- "none", "relative", "absolute"
-					--  }
-					--}
-					['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
-					['q'] = 'close_window',
-					['R'] = 'refresh',
-					['?'] = 'show_help',
-					['<'] = 'prev_source',
-					['>'] = 'next_source',
-					['i'] = 'show_file_details',
+					['A'] = 'add_directory', -- Добавить папку
+					['d'] = 'delete', -- Удалить
+					['r'] = 'rename', -- Переименовать
+					['y'] = 'copy_to_clipboard', -- Копировать в буфер
+					['x'] = 'cut_to_clipboard', -- Вырезать в буфер
+					['p'] = 'paste_from_clipboard', -- Вставить из буфера
+					['c'] = 'copy', -- Копировать (с запросом пути)
+					['m'] = 'move', -- Переместить (с запросом пути)
+					['q'] = 'close_window', -- Закрыть окно Neo-tree
+					['R'] = 'refresh', -- Обновить
+					['?'] = 'show_help', -- Показать справку
+					['<'] = 'prev_source', -- Предыдущий источник (буферы/гит/файлы)
+					['>'] = 'next_source', -- Следующий источник
+					['i'] = 'show_file_details', -- Показать детали файла
 				},
 			},
 			nesting_rules = {},
 			filesystem = {
 				filtered_items = {
-					visible = false, -- when true, they will just be displayed differently than normal items
+					visible = false, -- Показывать скрытые элементы особым стилем
 					hide_dotfiles = false,
 					hide_gitignored = false,
-					hide_hidden = false, -- only works on Windows for hidden files/directories
-					hide_by_name = {
+					hide_hidden = false, -- Работает только на Windows
+					hide_by_name = { -- Скрыть по имени
 						'.DS_Store',
 						'thumbs.db',
 						'node_modules',
@@ -202,80 +190,71 @@ return {
 						'.python-version',
 						'.venv',
 					},
-					hide_by_pattern = { -- uses glob style patterns
+					hide_by_pattern = { -- Шаблоны для скрытия (стиль glob)
 						--"*.meta",
-						--"*/src/*/tsconfig.json",
 					},
-					always_show = { -- remains visible even if other settings would normally hide it
+					always_show = { -- Всегда показывать (игнорирует скрытие)
 						--".gitignored",
 					},
-					never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+					never_show = { -- Никогда не показывать (игнорирует видимость)
 						--".DS_Store",
-						--"thumbs.db"
 					},
-					never_show_by_pattern = { -- uses glob style patterns
+					never_show_by_pattern = { -- Шаблоны для постоянного скрытия
 						--".null-ls_*",
 					},
 				},
 				follow_current_file = {
-					enabled = false,        -- This will find and focus the file in the active buffer every time
-					--               -- the current file is changed while the tree is open.
-					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+					enabled = false, -- Авто-фокус на файле активного буфера
+					leave_dirs_open = false, -- Закрывать автораскрытые папки
 				},
-				group_empty_dirs = false,   -- when true, empty folders will be grouped together
-				hijack_netrw_behavior = 'open_default', -- netrw disabled, opening a directory opens neo-tree
-				-- in whatever position is specified in window.position
-				-- "open_current",  -- netrw disabled, opening a directory opens within the
-				-- window like netrw would, regardless of window.position
-				-- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-				use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
-				-- instead of relying on nvim autocmd events.
+				group_empty_dirs = false, -- Группировать пустые папки
+				hijack_netrw_behavior = 'open_default', -- Режим интеграции с netrw
+				use_libuv_file_watcher = false, -- Использовать системные файловые наблюдатели
 				window = {
 					mappings = {
-						['<bs>'] = 'navigate_up',
-						['.'] = 'set_root',
-						['H'] = 'toggle_hidden',
-						['/'] = 'fuzzy_finder',
-						['D'] = 'fuzzy_finder_directory',
-						['#'] = 'fuzzy_sorter', -- fuzzy sorting using the fzy algorithm
-						-- ["D"] = "fuzzy_sorter_directory",
-						['f'] = 'filter_on_submit',
-						['<c-x>'] = 'clear_filter',
-						['[g'] = 'prev_git_modified',
-						[']g'] = 'next_git_modified',
-						['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
-						['oc'] = { 'order_by_created', nowait = false },
-						['od'] = { 'order_by_diagnostics', nowait = false },
-						['og'] = { 'order_by_git_status', nowait = false },
-						['om'] = { 'order_by_modified', nowait = false },
-						['on'] = { 'order_by_name', nowait = false },
-						['os'] = { 'order_by_size', nowait = false },
-						['ot'] = { 'order_by_type', nowait = false },
+						['<bs>'] = 'navigate_up', -- Перейти на уровень вверх
+						['.'] = 'set_root', -- Установить текущую папку как корень
+						['H'] = 'toggle_hidden', -- Показать/скрыть скрытые файлы
+						['/'] = 'fuzzy_finder', -- Поиск по файлам
+						['D'] = 'fuzzy_finder_directory', -- Поиск по директориям
+						['#'] = 'fuzzy_sorter', -- Сортировка через fzy
+						['f'] = 'filter_on_submit', -- Фильтр после ввода
+						['<c-x>'] = 'clear_filter', -- Сбросить фильтр
+						['[g'] = 'prev_git_modified', -- Предыдущий измененный в git
+						[']g'] = 'next_git_modified', -- Следующий измененный в git
+						-- Сортировки:
+						['o'] = { 'show_help', nowait = false, config = { title = 'Сортировать по', prefix_key = 'o' } },
+						['oc'] = { 'order_by_created', nowait = false }, -- Дата создания
+						['od'] = { 'order_by_diagnostics', nowait = false }, -- Диагностикам
+						['og'] = { 'order_by_git_status', nowait = false }, -- Git статусу
+						['om'] = { 'order_by_modified', nowait = false }, -- Изменению
+						['on'] = { 'order_by_name', nowait = false }, -- Имени
+						['os'] = { 'order_by_size', nowait = false }, -- Размеру
+						['ot'] = { 'order_by_type', nowait = false }, -- Типу
 					},
-					fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
+					fuzzy_finder_mappings = { -- Клавиши в режиме поиска
 						['<down>'] = 'move_cursor_down',
 						['<C-n>'] = 'move_cursor_down',
 						['<up>'] = 'move_cursor_up',
 						['<C-p>'] = 'move_cursor_up',
 					},
 				},
-
-				commands = {}, -- Add a custom command or override a global one using the same function name
+				commands = {}, -- Кастомные команды для файловой системы
 			},
 			buffers = {
 				follow_current_file = {
-					enabled = true, -- This will find and focus the file in the active buffer every time
-					--              -- the current file is changed while the tree is open.
-					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+					enabled = true, -- Фокусировать файл активного буфера
+					leave_dirs_open = false,
 				},
-				group_empty_dirs = true, -- when true, empty folders will be grouped together
-				show_unloaded = true,
+				group_empty_dirs = true, -- Группировать пустые папки
+				show_unloaded = true, -- Показывать не загруженные буферы
 				window = {
 					mappings = {
-						['bd'] = 'buffer_delete',
-						['<bs>'] = 'navigate_up',
-						['.'] = 'set_root',
-						['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
+						['bd'] = 'buffer_delete', -- Удалить буфер
+						['<bs>'] = 'navigate_up', -- На уровень вверх
+						['.'] = 'set_root', -- Установить корень
+						-- Сортировки (аналогично файловой системе):
+						['o'] = { 'show_help', nowait = false, config = { title = 'Сортировать по', prefix_key = 'o' } },
 						['oc'] = { 'order_by_created', nowait = false },
 						['od'] = { 'order_by_diagnostics', nowait = false },
 						['om'] = { 'order_by_modified', nowait = false },
@@ -287,16 +266,17 @@ return {
 			},
 			git_status = {
 				window = {
-					position = 'float',
+					position = 'float', -- Плавающее окно
 					mappings = {
-						['A'] = 'git_add_all',
-						['gu'] = 'git_unstage_file',
-						['ga'] = 'git_add_file',
-						['gr'] = 'git_revert_file',
-						['gc'] = 'git_commit',
-						['gp'] = 'git_push',
-						['gg'] = 'git_commit_and_push',
-						['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
+						['A'] = 'git_add_all', -- Добавить все изменения
+						['gu'] = 'git_unstage_file', -- Убрать из индекса
+						['ga'] = 'git_add_file', -- Добавить файл в индекс
+						['gr'] = 'git_revert_file', -- Откатить изменения в файле
+						['gc'] = 'git_commit', -- Создать коммит
+						['gp'] = 'git_push', -- Отправить в удаленный репозиторий
+						['gg'] = 'git_commit_and_push', -- Коммит и отправка
+						-- Сортировки (аналогично другим разделам):
+						['o'] = { 'show_help', nowait = false, config = { title = 'Сортировать по', prefix_key = 'o' } },
 						['oc'] = { 'order_by_created', nowait = false },
 						['od'] = { 'order_by_diagnostics', nowait = false },
 						['om'] = { 'order_by_modified', nowait = false },
@@ -307,9 +287,19 @@ return {
 				},
 			},
 		}
-
-		vim.cmd [[nnoremap \ :Neotree reveal<cr>]]
-		vim.keymap.set('n', '<leader>e', ':Neotree toggle position=left<CR>', { noremap = true, silent = true }) -- focus file explorer
-		vim.keymap.set('n', '<leader>ngs', ':Neotree float git_status<CR>', { noremap = true, silent = true }) -- open git status window
+		-- Пользовательские клавиши для управления Neo-tree
+		vim.cmd [[nnoremap \ :Neotree reveal<cr>]] -- Показать Neo-tree с текущим файлом
+		vim.keymap.set(
+			'n',
+			'<leader>e',
+			':Neotree toggle position=left<CR>',
+			{ noremap = true, silent = true, desc = 'Neotree: переключить видимость' }
+		) -- Переключить файловый эксплорер
+		vim.keymap.set(
+			'n',
+			'<leader>ngs',
+			':Neotree float git_status<CR>',
+			{ noremap = true, silent = true, desc = 'Neotree: плавающее окно Git статуса' }
+		) -- Окно статуса Git
 	end,
 }

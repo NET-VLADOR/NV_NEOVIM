@@ -29,15 +29,15 @@ return {
 			vim.cmd.colorscheme 'catppuccin'
 
 			-- Опционально: уведомление о состоянии
-			local state = bg_transparent and 'ON' or 'OFF'
-			print('Background transparency: ' .. state)
+			local state = bg_transparent and 'ВКЛ' or 'ВЫКЛ'
+			print('Прозрачный фон: ' .. state)
 		end
 
 		-- Назначение горячей клавиши
 		vim.keymap.set('n', '<leader>bg', toggle_transparency, {
 			noremap = true,
 			silent = true,
-			desc = 'Toggle background transparency',
+			desc = 'Переключить прозрачность фона',
 		})
 	end,
 }
