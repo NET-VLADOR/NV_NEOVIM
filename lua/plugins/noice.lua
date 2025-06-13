@@ -63,7 +63,7 @@ return {
     require('notify').setup {
       background_colour = '#000000', -- Чёрный фон для уведомлений
       timeout = 2000, -- Время показа уведомления (мс)
-
+      merge_duplicates = true,
       -- Другие полезные опции:
       -- max_width = 80,             -- Максимальная ширина уведомления
       -- render = 'minimal'          -- Стиль рендеринга (minimal/simple)

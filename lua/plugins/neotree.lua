@@ -71,6 +71,7 @@ return {
           folder_closed = '',
           folder_open = '',
           folder_empty = '󰜌',
+          folder_empty_open = '󰜌',
           -- Эти настройки используются, если не заданы иконки в nvim-web-devicons
           default = '*',
           highlight = 'NeoTreeFileIcon',
@@ -89,7 +90,7 @@ return {
             -- Типы изменений
             added = '', -- Или "✚"
             modified = '', -- Или ""
-            deleted = '✖️', -- Только для источника git_status
+            deleted = '', -- Только для источника git_status
             renamed = '󰁕', -- Только для источника git_status
             -- Статусы
             untracked = '',
@@ -110,14 +111,13 @@ return {
         },
         last_modified = {
           enabled = true,
+          format = 'relative',
           required_width = 88,
         },
         created = {
           enabled = true,
+          format = 'relative',
           required_width = 110,
-        },
-        symlink_target = {
-          enabled = false,
         },
       },
       -- Глобальные кастомные команды
@@ -295,11 +295,5 @@ return {
       ':Neotree toggle position=left<CR>',
       { noremap = true, silent = true, desc = 'Neotree: переключить видимость' }
     ) -- Переключить файловый эксплорер
-    vim.keymap.set(
-      'n',
-      '<leader>ngs',
-      ':Neotree float git_status<CR>',
-      { noremap = true, silent = true, desc = 'Neotree: плавающее окно Git статуса' }
-    ) -- Окно статуса Git
   end,
 }
