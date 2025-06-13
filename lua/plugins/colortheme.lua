@@ -34,7 +34,7 @@ return {
     end
 
     -- Назначение горячей клавиши
-    vim.keymap.set('n', '<leader>bg', toggle_transparency, {
+    vim.keymap.set('n', '<leader>tt', toggle_transparency, {
       noremap = true,
       silent = true,
       desc = 'Переключить прозрачность фона',

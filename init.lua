@@ -30,4 +30,5 @@ require('lazy').setup {
   require 'plugins.noice',
   require 'plugins.neogit',
   require 'plugins.which-key',
+  require 'plugins.comment',
 }

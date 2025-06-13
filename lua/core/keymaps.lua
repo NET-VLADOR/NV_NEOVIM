@@ -9,7 +9,8 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', { noremap = true, silent = true, desc = 'Сохранить файл' })
 
 -- Сохранение без автоформатирования
-vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', { noremap = true, silent = true, desc = 'Сохранить без форматирования' })
+vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>',
+	{ noremap = true, silent = true, desc = 'Сохранить без форматирования' })
 
 -- Закрытие файла
 vim.keymap.set('n', '<C-q>', '<cmd> q <CR>', { noremap = true, silent = true, desc = 'Закрыть файл' })
@@ -28,8 +29,10 @@ vim.keymap.set('n', 'N', 'Nzzzv', { noremap = true, silent = true, desc = 'Пр�
 -- Изменение размеров окон
 vim.keymap.set('n', '<Down>', ':resize -2<CR>', { noremap = true, silent = true, desc = 'Уменьшить высоту окна' })
 vim.keymap.set('n', '<Up>', ':resize +2<CR>', { noremap = true, silent = true, desc = 'Увеличить высоту окна' })
-vim.keymap.set('n', '<Right>', ':vertical resize -2<CR>', { noremap = true, silent = true, desc = 'Уменьшить ширину окна' })
-vim.keymap.set('n', '<Left>', ':vertical resize +2<CR>', { noremap = true, silent = true, desc = 'Увеличить ширину окна' })
+vim.keymap.set('n', '<Right>', ':vertical resize -2<CR>',
+	{ noremap = true, silent = true, desc = 'Уменьшить ширину окна' })
+vim.keymap.set('n', '<Left>', ':vertical resize +2<CR>',
+	{ noremap = true, silent = true, desc = 'Увеличить ширину окна' })
 
 -- Управление буферами
 vim.keymap.set('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true, desc = 'Следующий буфер' })
@@ -38,8 +41,8 @@ vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', { noremap = true, silent = tru
 vim.keymap.set('n', '<leader>b', '<cmd> enew <CR>', { noremap = true, silent = true, desc = 'Создать новый буфер' })
 
 -- Управление окнами
-vim.keymap.set('n', '<leader>v', '<C-w>v', { noremap = true, silent = true, desc = 'Вертикальное разделение окна' })
-vim.keymap.set('n', '<leader>h', '<C-w>s', { noremap = true, silent = true, desc = 'Горизонтальное разделение окна' })
+vim.keymap.set('n', '<leader>sv', '<C-w>v', { noremap = true, silent = true, desc = 'Вертикальное разделение окна' })
+vim.keymap.set('n', '<leader>sh', '<C-w>s', { noremap = true, silent = true, desc = 'Горизонтальное разделение окна' })
 vim.keymap.set('n', '<leader>se', '<C-w>=', { noremap = true, silent = true, desc = 'Выровнять размеры окон' })
 vim.keymap.set('n', '<leader>xs', ':close<CR>', { noremap = true, silent = true, desc = 'Закрыть текущее окно' })
 
@@ -50,13 +53,14 @@ vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent = true, d
 vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent = true, desc = 'Перейти в правое окно' })
 
 -- Управление вкладками
-vim.keymap.set('n', '<leader>to', ':tabnew<CR>', { noremap = true, silent = true, desc = 'Новая вкладка' })
-vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', { noremap = true, silent = true, desc = 'Закрыть текущую вкладку' })
-vim.keymap.set('n', '<leader>tn', ':tabn<CR>', { noremap = true, silent = true, desc = 'Следующая вкладка' })
-vim.keymap.set('n', '<leader>tp', ':tabp<CR>', { noremap = true, silent = true, desc = 'Предыдущая вкладка' })
+vim.keymap.set('n', '<leader>To', ':tabnew<CR>', { noremap = true, silent = true, desc = 'Новая вкладка' })
+vim.keymap.set('n', '<leader>Tx', ':tabclose<CR>', { noremap = true, silent = true, desc = 'Закрыть текущую вкладку' })
+vim.keymap.set('n', '<leader>Tn', ':tabn<CR>', { noremap = true, silent = true, desc = 'Следующая вкладка' })
+vim.keymap.set('n', '<leader>Tp', ':tabp<CR>', { noremap = true, silent = true, desc = 'Предыдущая вкладка' })
 
 -- Переключение переноса строк
-vim.keymap.set('n', '<leader>lw', '<cmd>set wrap!<CR>', { noremap = true, silent = true, desc = 'Переключить перенос строк' })
+vim.keymap.set('n', '<leader>tl', '<cmd>set wrap!<CR>',
+	{ noremap = true, silent = true, desc = 'Переключить перенос строк' })
 
 -- Сохранение режима отступа
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true, desc = 'Сдвиг выделения влево' })
