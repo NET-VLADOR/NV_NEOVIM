@@ -17,18 +17,6 @@ return {
     'tpope/vim-rhubarb',
   },
   {
-    -- Подсказки клавиатурных сочетаний
-    'folke/which-key.nvim',
-    config = function()
-      require('which-key').setup {
-        preset = 'modern',
-        icons = {
-          mappings = false,
-        },
-      }
-    end,
-  },
-  {
     -- Автозакрытие скобок, кавычек и тегов
     'windwp/nvim-autopairs',
     event = 'InsertEnter',

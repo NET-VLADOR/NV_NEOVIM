@@ -29,4 +29,5 @@ require('lazy').setup {
   require 'plugins.misc',
   require 'plugins.noice',
   require 'plugins.neogit',
+  require 'plugins.which-key',
 }

@@ -12,16 +12,17 @@ return {
       end,
     },
     { 'nvim-telescope/telescope-ui-select.nvim' },
-    { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+    { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
   },
   config = function()
     require('telescope').setup {
       defaults = {
+        results_title = false,
         mappings = {
           i = {
             ['<C-k>'] = require('telescope.actions').move_selection_previous, -- Предыдущий результат
-            ['<C-j>'] = require('telescope.actions').move_selection_next, -- Следующий результат
-            ['<C-l>'] = require('telescope.actions').select_default, -- Открыть файл
+            ['<C-j>'] = require('telescope.actions').move_selection_next,     -- Следующий результат
+            ['<C-l>'] = require('telescope.actions').select_default,          -- Открыть файл
           },
         },
       },
@@ -48,28 +49,37 @@ return {
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
 
-    -- Горячие клавиши
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Поиск в хелпе' })
-    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Поиск клавиш' })
-    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Поиск файлов' })
-    vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Поиск в Telescope' })
-    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Поиск слова под курсором' })
-    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Grep-поиск' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Поиск диагностики' })
-    vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Продолжить поиск' })
-    vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = 'Недавние файлы' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Поиск буферов' })
 
-    vim.keymap.set('n', '<leader>/', function()
+    local map = function(builtin_func, title)
+      return function()
+        builtin_func { prompt_title = title }
+      end
+    end
+
+    local fuzzy = function()
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 10,
         previewer = false,
       })
-    end, { desc = 'Поиск в текущем буфере' })
+    end
 
-    vim.keymap.set('n', '<leader>s/', function()
-      builtin.live_grep { grep_open_files = true, prompt_title = 'Grep в открытых файлах' }
-    end, { desc = 'Grep в открытых файлах' })
+    local live = function()
+      builtin.live_grep { grep_open_files = true, prompt_title = 'Поиск-Grep в открытых файлах' }
+    end
+
+    -- Горячие клавиши
+    vim.keymap.set('n', '<leader>fh', map(builtin.help_tags, 'Справка'), { desc = 'Поиск в справке' })
+    vim.keymap.set('n', '<leader>fk', map(builtin.keymaps, 'Горячие клавиши'), { desc = 'Поиск горячих клавиш' })
+    vim.keymap.set('n', '<leader>ff', map(builtin.find_files, 'Найти файл'), { desc = 'Поиск файлов' })
+    vim.keymap.set('n', '<leader>fs', map(builtin.builtin, 'Telescope'), { desc = 'Поиск в Telescope' })
+    vim.keymap.set('n', '<leader>fw', map(builtin.grep_string, 'Найти слово'), { desc = 'Поиск слова под курсором' })
+    vim.keymap.set('n', '<leader>fg', map(builtin.live_grep, 'Grep'), { desc = 'Поиск-Grep' })
+    vim.keymap.set('n', '<leader>fd', map(builtin.diagnostics, 'Диагностика'), { desc = 'Поиск диагностики' })
+    vim.keymap.set('n', '<leader>fb', map(builtin.buffers, 'Буфферы'), { desc = 'Поиск буферов' })
+    vim.keymap.set('n', '<leader>f.', map(builtin.oldfiles, 'Недавние файлы'), { desc = 'Поиск в недавних файлах' })
+    vim.keymap.set('n', '<leader>fo', live, { desc = 'Поиск-Grep в открытых файлах' })
+    vim.keymap.set('n', '<leader>f/', fuzzy, { desc = 'Поиск в текущем буфере' })
+    vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Продолжить поиск' })
   end,
 }

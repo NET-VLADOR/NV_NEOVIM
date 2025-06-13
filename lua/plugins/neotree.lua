@@ -145,8 +145,8 @@ return {
           -- ["S"] = "split_with_window_picker",  -- Альтернатива с выбором окна
           -- ["s"] = "vsplit_with_window_picker", -- Альтернатива с выбором окна
           ['t'] = 'open_tabnew', -- Открыть в новой вкладке
-          -- ["<cr>"] = "open_drop",         -- Открыть с выпадением (deprecated)
-          -- ["t"] = "open_tab_drop",        -- Открыть в новой вкладке с выпадением (deprecated)
+          -- ["<cr>"] = "open_drop",         -- Открыть с выпадением
+          -- ["t"] = "open_tab_drop",        -- Открыть в новой вкладке с выпадением
           ['w'] = 'open_with_window_picker', -- Открыть с выбором окна
           ['C'] = 'close_node', -- Закрыть текущий узел
           ['z'] = 'close_all_nodes', -- Свернуть все узлы
