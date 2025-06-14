@@ -9,8 +9,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', { noremap = true, silent = true, desc = 'Сохранить файл' })
 
 -- Сохранение без автоформатирования
-vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>',
-	{ noremap = true, silent = true, desc = 'Сохранить без форматирования' })
+vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', { noremap = true, silent = true, desc = 'Сохранить без форматирования' })
 
 -- Закрытие файла
 vim.keymap.set('n', '<C-q>', '<cmd> q <CR>', { noremap = true, silent = true, desc = 'Закрыть файл' })
@@ -29,10 +28,8 @@ vim.keymap.set('n', 'N', 'Nzzzv', { noremap = true, silent = true, desc = 'Пр�
 -- Изменение размеров окон
 vim.keymap.set('n', '<Down>', ':resize -2<CR>', { noremap = true, silent = true, desc = 'Уменьшить высоту окна' })
 vim.keymap.set('n', '<Up>', ':resize +2<CR>', { noremap = true, silent = true, desc = 'Увеличить высоту окна' })
-vim.keymap.set('n', '<Right>', ':vertical resize -2<CR>',
-	{ noremap = true, silent = true, desc = 'Уменьшить ширину окна' })
-vim.keymap.set('n', '<Left>', ':vertical resize +2<CR>',
-	{ noremap = true, silent = true, desc = 'Увеличить ширину окна' })
+vim.keymap.set('n', '<Right>', ':vertical resize -2<CR>', { noremap = true, silent = true, desc = 'Уменьшить ширину окна' })
+vim.keymap.set('n', '<Left>', ':vertical resize +2<CR>', { noremap = true, silent = true, desc = 'Увеличить ширину окна' })
 
 -- Управление буферами
 vim.keymap.set('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true, desc = 'Следующий буфер' })
@@ -59,8 +56,7 @@ vim.keymap.set('n', '<leader>Tn', ':tabn<CR>', { noremap = true, silent = true, 
 vim.keymap.set('n', '<leader>Tp', ':tabp<CR>', { noremap = true, silent = true, desc = 'Предыдущая вкладка' })
 
 -- Переключение переноса строк
-vim.keymap.set('n', '<leader>tl', '<cmd>set wrap!<CR>',
-	{ noremap = true, silent = true, desc = 'Переключить перенос строк' })
+vim.keymap.set('n', '<leader>tl', '<cmd>set wrap!<CR>', { noremap = true, silent = true, desc = 'Переключить перенос строк' })
 
 -- Сохранение режима отступа
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true, desc = 'Сдвиг выделения влево' })
