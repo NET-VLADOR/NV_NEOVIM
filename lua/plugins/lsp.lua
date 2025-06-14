@@ -17,9 +17,6 @@ return {
     },
     -- Индикация статуса LSP
     { 'j-hui/fidget.nvim', opts = {} },
-
-    -- Интеграция с автодополнением
-    'hrsh7th/cmp-nvim-lsp',
   },
   config = function()
     -- LSP (Language Server Protocol) - протокол для взаимодействия
@@ -126,6 +123,7 @@ return {
     -- Настройки языковых серверов
     local servers = {
       ts_ls = {}, -- TypeScript
+      eslint = {},
       html = { filetypes = { 'html', 'twig', 'hbs' } },
       cssls = {}, -- CSS
       tailwindcss = {}, -- Tailwind CSS
@@ -148,11 +146,14 @@ return {
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'stylua', -- Форматировщик Lua
+      'prettierd',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     -- Инициализация LSP-серверов
     require('mason-lspconfig').setup {
+      ensure_installed = {},
+      automatic_enable = false,
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
