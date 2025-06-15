@@ -1,4 +1,5 @@
 return {
+  -- https://github.com/folke/noice.nvim
   'folke/noice.nvim',
   event = 'VeryLazy', -- Ленивая загрузка при первом использовании
   opts = {

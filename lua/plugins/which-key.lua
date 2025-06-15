@@ -1,5 +1,6 @@
 return {
   -- Подсказки клавиатурных сочетаний
+  -- https://github.com/folke/which-key.nvim
   'folke/which-key.nvim',
   config = function()
     local wk = require 'which-key'
@@ -19,6 +20,7 @@ return {
     wk.add {
       { '<leader>f', group = 'Поиск' }, -- Группа клавиш связанных с поиском
       { '<leader>T', group = 'Табы', icon = ' ' }, -- Группа клавиш связанных с работой с табами
+      { '<leader>w', group = 'Окна', icon = ' ' }, -- Группа клавиш связанных с работой с табами
       { '<leader>t', group = 'Переключить' }, -- Группа клавиш связанных с переключением значений
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Группа клавиш связанных с Git Hunk
       { '<leader>l', group = 'LSP' }, -- Группа клавиш связанных с LSP

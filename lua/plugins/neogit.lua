@@ -1,4 +1,5 @@
 return {
+  -- https://github.com/NeogitOrg/neogit
   'NeogitOrg/neogit',
   dependencies = {
     'nvim-lua/plenary.nvim', -- required

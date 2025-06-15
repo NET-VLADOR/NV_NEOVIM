@@ -1,6 +1,8 @@
 return {
+  -- https://github.com/akinsho/bufferline.nvim
   'akinsho/bufferline.nvim',
   dependencies = {
+    -- https://github.com/moll/vim-bbye
     'moll/vim-bbye', -- Для корректного закрытия буферов без нарушения работы Neovim
     'nvim-tree/nvim-web-devicons', -- Иконки для буферов (требует Nerd Font)
   },
