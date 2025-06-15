@@ -1,4 +1,5 @@
 return {
+  -- https://github.com/nvim-lualine/lualine.nvim
   'nvim-lualine/lualine.nvim',
   config = function()
     -- Настройка отображения текущего режима Vim
@@ -22,13 +23,13 @@ return {
       return vim.fn.winwidth(0) > 100 -- Показывать компонент только если ширина окна > 100 символов
     end
 
-    -- Настройка отображения диагностик
+    -- Настройка отображения диагностики
     local diagnostics = {
       'diagnostics',
-      sources = { 'nvim_diagnostic' }, -- Источник диагностик
-      sections = { 'error', 'warn' }, -- Показывать только ошибки и предупреждения
-      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' }, -- Иконки для диагностик
-      colored = false, -- Не использовать цветовую подсветку
+      sources = { 'nvim_diagnostic' }, -- Источник диагностики
+      sections = { 'error', 'warn', 'info', 'hint' }, -- Показывать ошибки, предупреждения, информацию и подсказки
+      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' }, -- Иконки для диагностики
+      colored = true, -- Использовать цветовую подсветку
       update_in_insert = false, -- Не обновлять в режиме вставки
       always_visible = false, -- Не показывать постоянно
       cond = hide_in_width, -- Условие отображения (только на широких экранах)
@@ -37,7 +38,7 @@ return {
     -- Настройка отображения изменений в Git
     local diff = {
       'diff',
-      colored = false, -- Отключить цветовую подсветку
+      colored = true, -- Использовать цветовую подсветку
       symbols = { added = ' ', modified = ' ', removed = ' ' }, -- Иконки для изменений
       cond = hide_in_width, -- Условие отображения (только на широких экранах)
     }
