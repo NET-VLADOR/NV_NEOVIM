@@ -3,7 +3,7 @@ return {
   'neovim/nvim-lspconfig',
   dependencies = {
     -- Автоматическая установка LSP-серверов и инструментов
-    { 'williamboman/mason.nvim', config = true }, -- Должен загружаться первым
+    { 'williamboman/mason.nvim', opts = {} },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     {
@@ -15,8 +15,6 @@ return {
         },
       },
     },
-    -- Индикация статуса LSP
-    { 'j-hui/fidget.nvim', opts = {} },
   },
   config = function()
     -- LSP (Language Server Protocol) - протокол для взаимодействия
@@ -50,11 +48,6 @@ return {
           vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
         end, 'Переключить подсказки в коде')
 
-        -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-        ---@param client vim.lsp.Client
-        ---@param method vim.lsp.protocol.Method
-        ---@param bufnr? integer some lsp support methods only in specific files
-        ---@return boolean
         local function client_supports_method(client, method, bufnr)
           if vim.fn.has 'nvim-0.11' == 1 then
             return client:supports_method(method, bufnr)
@@ -94,14 +87,14 @@ return {
       severity_sort = true,
       float = { border = 'rounded', source = 'if_many' },
       underline = { severity = vim.diagnostic.severity.ERROR },
-      signs = vim.g.have_nerd_font and {
+      signs = {
         text = {
           [vim.diagnostic.severity.ERROR] = '󰅚 ',
           [vim.diagnostic.severity.WARN] = '󰀪 ',
           [vim.diagnostic.severity.INFO] = '󰋽 ',
           [vim.diagnostic.severity.HINT] = '󰌶 ',
         },
-      } or {},
+      },
       virtual_text = {
         source = 'if_many',
         spacing = 2,
@@ -116,14 +109,16 @@ return {
         end,
       },
     }
+
     -- Расширенные возможности для LSP
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+    local original_capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = require('blink-cmp').get_lsp_capabilities(original_capabilities)
 
     -- Настройки языковых серверов
     local servers = {
       ts_ls = {}, -- TypeScript
-      eslint = {},
+      bashls = {}, --bash
+      eslint = {}, --JavaScritp
       html = { filetypes = { 'html', 'twig', 'hbs' } },
       cssls = {}, -- CSS
       tailwindcss = {}, -- Tailwind CSS
@@ -141,7 +136,6 @@ return {
         },
       },
     }
-
     -- Автоматическая установка серверов и инструментов
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
@@ -153,7 +147,8 @@ return {
     -- Инициализация LSP-серверов
     require('mason-lspconfig').setup {
       ensure_installed = {},
-      automatic_enable = false,
+      automatic_enable = true,
+      automatic_installation = false,
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}

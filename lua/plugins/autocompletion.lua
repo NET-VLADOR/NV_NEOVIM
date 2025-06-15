@@ -1,135 +1,65 @@
 return {
-  'hrsh7th/nvim-cmp',
-  dependencies = {
-    {
-      'L3MON4D3/LuaSnip',
-      build = (function()
-        if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-          return
-        end
-        return 'make install_jsregexp'
-      end)(),
-      dependencies = {
-        {
-          'rafamadriz/friendly-snippets',
-          config = function()
-            require('luasnip.loaders.from_vscode').lazy_load()
-          end,
+  {
+    'saghen/blink.compat',
+    version = '*',
+    lazy = true,
+    opts = {},
+  },
+  {
+    -- https://github.com/Saghen/blink.cmp
+    'saghen/blink.cmp',
+    -- опционально: предоставляет сниппеты для источника сниппетов
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+    },
+    version = '1.*',
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      -- 'default' (рекомендуется): мэппинги как в стандартном автодополнении (C-y для принятия)
+      -- 'super-tab': мэппинги как в VSCode (Tab для принятия)
+      -- 'enter': Enter для принятия
+      keymap = {
+        preset = 'super-tab',
+        ['<C-j>'] = { 'select_next', 'fallback' }, -- Следующий элемент
+        ['<C-k>'] = { 'select_prev', 'fallback' }, -- Предыдущий элемент
+        ['<A-CR>'] = {
+          function(cmp)
+            if cmp.is_visible() then
+              cmp.cancel()
+            else
+              cmp.show()
+            end
+          end, -- Принудительный вызов автодополнения
         },
       },
-    },
-    'saadparwaiz1/cmp_luasnip',
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-  },
-  config = function()
-    local cmp = require 'cmp'
-    local luasnip = require 'luasnip'
-    luasnip.config.setup {}
-
-    -- Иконки для типов автодополнения
-    local kind_icons = {
-      Text = '󰉿',
-      Method = 'm',
-      Function = '󰊕',
-      Constructor = '',
-      Field = '',
-      Variable = '󰆧',
-      Class = '󰌗',
-      Interface = '',
-      Module = '',
-      Property = '',
-      Unit = '',
-      Value = '󰎠',
-      Enum = '',
-      Keyword = '󰌋',
-      Snippet = '',
-      Color = '󰏘',
-      File = '󰈙',
-      Reference = '',
-      Folder = '󰉋',
-      EnumMember = '',
-      Constant = '󰇽',
-      Struct = '',
-      Event = '',
-      Operator = '󰆕',
-      TypeParameter = '󰊄',
-    }
-
-    cmp.setup {
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
+      appearance = {
+        -- 'mono' (по умолчанию): для 'Nerd Font Mono'
+        -- 'normal': для 'Nerd Font'
+        -- Регулировка отступов для выравнивания иконок
+        nerd_font_variant = 'mono',
       },
-      completion = { completeopt = 'menu,menuone,noinsert' },
-
-      -- Настройки горячих клавиш:
-      mapping = cmp.mapping.preset.insert {
-        ['<C-n>'] = cmp.mapping.select_next_item(), -- Следующий элемент
-        ['<C-p>'] = cmp.mapping.select_prev_item(), -- Предыдущий элемент
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4), -- Прокрутка доков вверх
-        ['<C-f>'] = cmp.mapping.scroll_docs(4), -- Прокрутка доков вниз
-        ['<C-y>'] = cmp.mapping.confirm { select = true }, -- Подтвердить выбор
-        ['<A-CR>'] = cmp.mapping.complete {}, -- Принудительный вызов автодополнения
-
-        -- Навигация внутри сниппетов:
-        ['<C-l>'] = cmp.mapping(function()
-          if luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump() -- Переход вперед в сниппете
-          end
-        end, { 'i', 's' }),
-        ['<C-h>'] = cmp.mapping(function()
-          if luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1) -- Переход назад в сниппете
-          end
-        end, { 'i', 's' }),
-
-        -- Умный Tab/Shift-Tab:
-        ['<Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item() -- Выбор следующего элемента
-          elseif luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump() -- Активация/переход в сниппете
-          else
-            fallback() -- Стандартное поведение Tab
-          end
-        end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item() -- Выбор предыдущего элемента
-          elseif luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1) -- Переход назад в сниппете
-          else
-            fallback() -- Стандартное поведение Shift-Tab
-          end
-        end, { 'i', 's' }),
+      -- (По умолчанию) Документация только при ручном вызове
+      completion = {
+        menu = { border = 'rounded', draw = { columns = { { 'kind_icon', 'label', 'label_description', gap = 2 }, { 'kind' } } } },
+        documentation = { auto_show = true },
       },
+      signature = { enabled = true },
 
-      -- Источники автодополнения
+      -- Стандартный список источников для расширения
       sources = {
-        { name = 'lazydev', group_index = 0 },
-        { name = 'nvim_lsp' }, -- LSP серверы
-        { name = 'luasnip' }, -- Сниппеты
-        { name = 'buffer' }, -- Буфер текущего файла
-        { name = 'path' }, -- Пути файловой системы
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        providers = {},
       },
 
-      -- Форматирование внешнего вида
-      formatting = {
-        fields = { 'kind', 'abbr', 'menu' },
-        format = function(entry, vim_item)
-          vim_item.kind = kind_icons[vim_item.kind] -- Иконка типа
-          vim_item.menu = ({
-            nvim_lsp = '[LSP]',
-            luasnip = '[Сниппет]',
-            buffer = '[Буфер]',
-            path = '[Путь]',
-          })[entry.source.name] -- Источник дополнения
-          return vim_item
-        end,
-      },
-    }
-  end,
+      -- (По умолчанию) Rust fuzzy-поиск для устойчивости к опечаткам и производительности
+      -- Альтернативы:
+      -- `implementation = "lua"` для Lua-реализации
+      -- `implementation = "prefer_rust"` для Rust с Lua-фолбэком
+      --
+      -- Детали см. в документации fuzzy
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
+    },
+    opts_extend = { 'sources.default' },
+  },
 }
