@@ -38,10 +38,10 @@ vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', { noremap = true, silent = tru
 vim.keymap.set('n', '<leader>b', '<cmd> enew <CR>', { noremap = true, silent = true, desc = 'Создать новый буфер' })
 
 -- Управление окнами
-vim.keymap.set('n', '<leader>sv', '<C-w>v', { noremap = true, silent = true, desc = 'Вертикальное разделение окна' })
-vim.keymap.set('n', '<leader>sh', '<C-w>s', { noremap = true, silent = true, desc = 'Горизонтальное разделение окна' })
-vim.keymap.set('n', '<leader>se', '<C-w>=', { noremap = true, silent = true, desc = 'Выровнять размеры окон' })
-vim.keymap.set('n', '<leader>xs', ':close<CR>', { noremap = true, silent = true, desc = 'Закрыть текущее окно' })
+vim.keymap.set('n', '<leader>wv', '<C-w>v', { noremap = true, silent = true, desc = 'Вертикальное разделение окна' })
+vim.keymap.set('n', '<leader>wh', '<C-w>s', { noremap = true, silent = true, desc = 'Горизонтальное разделение окна' })
+vim.keymap.set('n', '<leader>we', '<C-w>=', { noremap = true, silent = true, desc = 'Выровнять размеры окон' })
+vim.keymap.set('n', '<leader>wx', ':close<CR>', { noremap = true, silent = true, desc = 'Закрыть текущее окно' })
 
 -- Навигация между окнами
 vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', { noremap = true, silent = true, desc = 'Перейти в верхнее окно' })
