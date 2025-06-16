@@ -10,7 +10,7 @@
 
 1. Клонируйте репозиторий:
 ```sh
-git clone git@github.com:NET-VLADOR/NV_NEOVIM ~/.config/nvim
+git clone https://github.com/NET-VLADOR/NV_NEOVIM.git
 ```
 
 2. Запустите Neovim, плагины установятся автоматически:
