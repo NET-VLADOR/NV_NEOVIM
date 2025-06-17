@@ -23,6 +23,16 @@ return {
       return vim.fn.winwidth(0) > 100 -- Показывать компонент только если ширина окна > 100 символов
     end
 
+    local fileformat = {
+      'fileformat',
+      symbols = {
+        unix = ' LF',
+        dos = ' CRLF',
+        mac = ' CR',
+      },
+      cond = hide_in_width, -- Условие отображения (только на широких экранах)
+    }
+
     -- Настройка отображения диагностики
     local diagnostics = {
       'diagnostics',
@@ -64,6 +74,7 @@ return {
         lualine_x = { -- Правая часть (различная информация)
           diagnostics, -- Диагностики
           diff, -- Git diff
+          fileformat,
           { 'encoding', cond = hide_in_width }, -- Кодировка файла
           { 'filetype', cond = hide_in_width }, -- Тип файла
         },
