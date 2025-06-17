@@ -4,10 +4,11 @@ return {
   'folke/which-key.nvim',
   config = function()
     local wk = require 'which-key'
+    ---@diagnostic disable-next-line: missing-fields
     wk.setup {
       preset = 'modern',
       timeoutlen = 1500,
-      show_help = false,
+      show_help = true,
       icons = {
         mappings = true,
         rules = {
@@ -18,12 +19,14 @@ return {
       },
     }
     wk.add {
-      { '<leader>f', group = 'Поиск' }, -- Группа клавиш связанных с поиском
-      { '<leader>T', group = 'Табы', icon = ' ' }, -- Группа клавиш связанных с работой с табами
-      { '<leader>w', group = 'Окна', icon = ' ' }, -- Группа клавиш связанных с работой с табами
-      { '<leader>t', group = 'Переключить' }, -- Группа клавиш связанных с переключением значений
-      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Группа клавиш связанных с Git Hunk
-      { '<leader>l', group = 'LSP' }, -- Группа клавиш связанных с LSP
+      { '<leader>;', group = 'Хлебные крошки', icon = ' ' },
+      { '<leader>f', group = 'Поиск' },
+      { '<leader>T', group = 'Табы', icon = ' ' },
+      { '<leader>w', group = 'Окна', icon = ' ' },
+      { '<leader>t', group = 'Переключить' },
+      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      { '<leader>l', group = 'LSP', icon = '󰧑 ' },
+      { '<leader>n', group = 'Создать', icon = '󰎔 ' },
     }
   end,
 }
