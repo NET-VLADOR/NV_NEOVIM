@@ -118,6 +118,7 @@ return {
     local servers = {
       ts_ls = {}, -- TypeScript
       bashls = {}, --bash
+      mdx_analyzer = {}, -- MDX
       eslint = {}, --JavaScritp
       html = { filetypes = { 'html', 'twig', 'hbs' } },
       cssls = {}, -- CSS

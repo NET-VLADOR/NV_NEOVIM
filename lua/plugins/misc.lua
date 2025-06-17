@@ -59,4 +59,11 @@ return {
       maxkeys = 5,
     },
   },
+  {
+    -- Отображение подсветки в MDX файлах
+    -- https://github.com/davidmh/mdx.nvim
+    'davidmh/mdx.nvim',
+    config = true,
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  },
 }
