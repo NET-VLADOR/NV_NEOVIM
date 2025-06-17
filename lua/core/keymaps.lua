@@ -35,7 +35,7 @@ vim.keymap.set('n', '<Left>', ':vertical resize +2<CR>', { noremap = true, silen
 vim.keymap.set('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true, desc = 'Следующий буфер' })
 vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true, desc = 'Предыдущий буфер' })
 vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', { noremap = true, silent = true, desc = 'Закрыть текущий буфер' })
-vim.keymap.set('n', '<leader>b', '<cmd> enew <CR>', { noremap = true, silent = true, desc = 'Создать новый буфер' })
+vim.keymap.set('n', '<leader>nb', '<cmd> enew <CR>', { noremap = true, silent = true, desc = 'Создать новый буфер' })
 
 -- Управление окнами
 vim.keymap.set('n', '<leader>wv', '<C-w>v', { noremap = true, silent = true, desc = 'Вертикальное разделение окна' })
