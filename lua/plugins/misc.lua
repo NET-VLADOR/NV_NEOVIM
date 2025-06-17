@@ -21,12 +21,22 @@ return {
     'tpope/vim-rhubarb',
   },
   {
-    -- Автозакрытие скобок, кавычек и тегов
+    -- Автозакрытие скобок, кавычек
     -- https://github.com/windwp/nvim-autopairs
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = true,
     opts = {},
+  },
+  {
+    -- Автозакрытие тегов
+    -- https://github.com/windwp/nvim-ts-autotag
+    'windwp/nvim-ts-autotag',
+    opts = {
+      enable_close = true,
+      enable_rename = true,
+      enable_close_on_slash = false,
+    },
   },
   {
     -- Подсветка TODO, NOTE и других меток в комментариях

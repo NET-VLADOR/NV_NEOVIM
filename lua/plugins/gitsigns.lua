@@ -55,7 +55,6 @@ return {
       map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '(Git) Добавить кусок в индекс (stage hunk)' })
       map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '(Git) Отменить изменения в куске (reset hunk)' })
       map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '(Git) Добавить весь файл в индекс (stage buffer)' })
-      map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = '(Git) Отменить stage для куска (undo stage)' })
       map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '(Git) Отменить все изменения в файле (reset buffer)' })
       map('n', '<leader>hp', gitsigns.preview_hunk_inline, { desc = '(Git) Просмотреть изменения в куске (preview hunk)' })
       map('n', '<leader>hb', gitsigns.blame_line, { desc = '(Git) Показать автора строки (git blame)' })
@@ -66,9 +65,6 @@ return {
 
       -- Переключатели
       map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '(Git) Переключить git blame для строки' })
-      map('n', '<leader>tD', gitsigns.toggle_deleted, {
-        desc = '(Git) Переключить отображение удалений (show deleted)',
-      })
     end,
   },
 }
