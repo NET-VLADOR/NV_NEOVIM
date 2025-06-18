@@ -12,7 +12,7 @@ return {
       icons = {
         mappings = true,
         rules = {
-          { pattern = '[Пп]оиск', icon = ' ', color = 'green' },
+          { pattern = '[Пп]оиск', icon = ' ', color = 'blue' },
           { pattern = '[Пп]ереключить', icon = ' ', color = 'yellow' },
           { pattern = '[Gg]it', icon = ' ', color = 'red' },
         },

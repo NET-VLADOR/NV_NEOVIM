@@ -44,6 +44,7 @@ return {
         map('<leader>ln', vim.lsp.buf.rename, 'Переименовать')
         map('<leader>la', vim.lsp.buf.code_action, 'Код-действия', { 'n', 'x' })
         map('<leader>lD', vim.lsp.buf.declaration, 'Перейти к объявлению')
+        map('K', vim.lsp.buf.hover, 'Показать документацию')
         map('<leader>th', function() -- Переключение подсказок
           vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
         end, 'Переключить подсказки в коде')

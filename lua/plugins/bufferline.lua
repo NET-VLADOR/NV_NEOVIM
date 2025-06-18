@@ -22,7 +22,7 @@ return {
         max_name_length = 30, -- Макс. длина имени буфера
         max_prefix_length = 30, -- Макс. длина префикса при дедупликации
         tab_size = 20, -- Ширина вкладки
-        diagnostics = false, -- Интеграция с диагностикой (lsp и т.п.)
+        diagnostics = true, -- Интеграция с диагностикой (lsp и т.п.)
         diagnostics_update_in_insert = false, -- Обновлять диагностику в режиме insert
         color_icons = true, -- Раскрашивать иконки в цвет типа файла
         show_buffer_icons = true, -- Показывать иконки буферов
@@ -41,6 +41,14 @@ return {
         maximum_padding = 5, -- Максимальный отступ между элементами
         maximum_length = 15, -- Максимальное количество отображаемых элементов
         sort_by = 'insert_at_end', -- Сортировка: "insert_at_end" (по порядку добавления), "id" (по ID), "extension" (по расширению) и др.
+        offsets = {
+          {
+            filetype = 'NvimTree',
+            text = 'Файловый менеджер',
+            text_align = 'center',
+            separator = true,
+          },
+        },
       },
       highlights = {
         separator = {
