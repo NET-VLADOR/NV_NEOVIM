@@ -26,21 +26,23 @@ nvim
 
 |Категория|Плагины|
 |---|---|
-|**Цветовые схемы**|[catppuccin/nvim](https://dotfyle.com/plugins/catppuccin/nvim)|
-|**Комментирование**|[Comment.nvim](https://dotfyle.com/plugins/numToStr/Comment.nvim), [todo-comments.nvim](https://dotfyle.com/plugins/folke/todo-comments.nvim)|
-|**Автодополнение**|[blink.cmp](https://dotfyle.com/plugins/Saghen/blink.cmp), [friendly-snippets](https://dotfyle.com/plugins/rafamadriz/friendly-snippets)|
-|**Редактирование**|[nvim-autopairs](https://dotfyle.com/plugins/windwp/nvim-autopairs), [nvim-ts-autotag](https://dotfyle.com/plugins/windwp/nvim-ts-autotag)|
-|**Файловый менеджер**|[neo-tree.nvim](https://dotfyle.com/plugins/nvim-neo-tree/neo-tree.nvim), [nui.nvim](https://dotfyle.com/plugins/MunifTanjim/nui.nvim), [nvim-web-devicons](https://dotfyle.com/plugins/nvim-tree/nvim-web-devicons)|
-|**Форматирование**|[conform.nvim](https://dotfyle.com/plugins/stevearc/conform.nvim)|
-|**Поиск**|[telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)|
-|**Git**|[diffview.nvim](https://dotfyle.com/plugins/sindrets/diffview.nvim), [gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim), [neogit](https://dotfyle.com/plugins/NeogitOrg/neogit)|
-|**Интерфейс**|[alpha-nvim](https://dotfyle.com/plugins/goolord/alpha-nvim), [lualine.nvim](https://dotfyle.com/plugins/nvim-lualine/lualine.nvim), [bufferline.nvim](https://dotfyle.com/plugins/akinsho/bufferline.nvim), [dropbar.nvim](https://dotfyle.com/plugins/Bekaboo/dropbar.nvim), [noice.nvim](https://dotfyle.com/plugins/folke/noice.nvim)|
-|**LSP**|[mason.nvim](https://dotfyle.com/plugins/williamboman/mason.nvim), [nvim-lspconfig](https://dotfyle.com/plugins/neovim/nvim-lspconfig)|
-|**Treesitter**|[nvim-treesitter](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter)|
-|**Сворачивание**|[nvim-ufo](https://dotfyle.com/plugins/kevinhwang91/nvim-ufo)|
-|**Прочее**|[image.nvim](https://dotfyle.com/plugins/samodostal/image.nvim), [neoscroll.nvim](https://dotfyle.com/plugins/karb94/neoscroll.nvim)|
+|**Цветовые схемы**|[catppuccin/nvim](https://github.com/catppuccin/nvim)|
+|**Комментирование**|[Comment.nvim](https://github.com/numToStr/Comment.nvim), [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)|
+|**Автодополнение**|[blink.cmp](https://github.com/Saghen/blink.cmp), [friendly-snippets](https://github.com/rafamadriz/friendly-snippets), [blink.compat](https://github.com/Saghen/blink.cmp)|
+|**Редактирование**|[nvim-autopairs](https://github.com/windwp/nvim-autopairs), [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag), [vim-sleuth](https://github.com/tpope/vim-sleuth)|
+|**Файловый менеджер**|[nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua)|
+|**Форматирование**|[conform.nvim](https://github.com/stevearc/conform.nvim)|
+|**Поиск**|[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim), [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim), [telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)|
+|**Git**|[diffview.nvim](https://github.com/sindrets/diffview.nvim), [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [neogit](https://github.com/NeogitOrg/neogit), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-rhubarb](https://github.com/tpope/vim-rhubarb)|
+|**Интерфейс**|[alpha-nvim](https://github.com/goolord/alpha-nvim), [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim), [bufferline.nvim](https://github.com/akinsho/bufferline.nvim), [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim), [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim), [noice.nvim](https://github.com/folke/noice.nvim), [nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua), [nvim-notify](https://github.com/rcarriga/nvim-notify), [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons), [which-key.nvim](https://github.com/folke/which-key.nvim)|
+|**LSP**|[mason.nvim](https://github.com/williamboman/mason.nvim), [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim), [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim), [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig), [lazydev.nvim](https://github.com/folke/lazydev.nvim)|
+|**Treesitter**|[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)|
+|**Сворачивание**|[nvim-ufo](https://github.com/kevinhwang91/nvim-ufo), [promise-async](https://github.com/kevinhwang91/promise-async), [statuscol.nvim](https://github.com/luukvbaal/statuscol.nvim)|
+|**Навигация**|[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)|
+|**Управление буферами**|[vim-bbye](https://github.com/moll/vim-bbye)|
+|**Прочее**|[mdx.nvim](https://github.com/davidmh/mdx.nvim) (MDX support), [neoscroll.nvim](https://github.com/karb94/neoscroll.nvim) (плавная прокрутка), [nui.nvim](https://github.com/MunifTanjim/nui.nvim) (UI компоненты), [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) (утилиты), [showkeys](https://github.com/nvzone/showkeys) (отображение клавиш)|
 
-*(Всего 49 плагинов, полный список см. в исходной конфигурации)*
+*(Всего 46 плагинов)*
 
 ### 🌐 Языковые серверы (LSP)
 
@@ -63,20 +65,20 @@ nvim
 
 ### ⚙️ Системные компоненты
 
-- **Менеджер плагинов:** [Lazy.nvim](https://dotfyle.com/plugins/folke/lazy.nvim)
-- **Иконки:** [nvim-web-devicons](https://dotfyle.com/plugins/nvim-tree/nvim-web-devicons)
-- **Уведомления:** [nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
-- **Расширенный UI:** [noice.nvim](https://dotfyle.com/plugins/folke/noice.nvim)
-- **Интеграция с tmux:** [vim-tmux-navigator](https://dotfyle.com/plugins/christoomey/vim-tmux-navigator)
+- **Менеджер плагинов:** [lazy.nvim](https://github.com/folke/lazy.nvim)
+- **Иконки:** [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
+- **Уведомления:** [nvim-notify](https://github.com/rcarriga/nvim-notify)
+- **Расширенный UI:** [noice.nvim](https://github.com/folke/noice.nvim)
+- **Интеграция с tmux:** [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
 
 ## Особенности работы
 
 - **Автоматическая настройка LSP** через Mason при первом запуске
-- **Адаптивное форматирование** при сохранении файлов (через conform.nvim)
+- **Адаптивное форматирование** при сохранении файлов (conform.nvim)
 - **Визуализация изменений Git** в реальном времени (gitsigns.nvim)
-- **Просмотр изображений** непосредственно в Neovim (image.nvim)
 - **Плавная прокрутка** текста (neoscroll.nvim)
-- **Контекстная навигация** по коду (dropbar.nvim, treesitter-context)
+- **Контекстная навигация** по коду (dropbar.nvim, treesitter)
+- **Интеллектуальное сворачивание** кода (nvim-ufo + treesitter)
 
 ## Рекомендации
 
