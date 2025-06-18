@@ -109,6 +109,8 @@ return {
         signcolumn = 'yes',
       },
       renderer = {
+        highlight_hidden = 'all',
+        hidden_display = 'all',
         indent_markers = {
           enable = true,
           icons = {
