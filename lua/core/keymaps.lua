@@ -66,6 +66,14 @@ vim.keymap.set(
   { noremap = true, silent = true, desc = 'Переключить режим относительных строк' }
 )
 
+-- Переключение видимости нажимаемых клавиш
+vim.keymap.set(
+  'n',
+  '<leader>ts',
+  '<cmd>ShowkeysToggle<CR>',
+  { noremap = true, silent = true, desc = 'Переключить видимость нажимаемых клавиш' }
+)
+
 -- Сохранение режима отступа
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true, desc = 'Сдвиг выделения влево' })
 vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true, desc = 'Сдвиг выделения вправо' })
