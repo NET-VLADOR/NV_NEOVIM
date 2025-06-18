@@ -58,6 +58,14 @@ vim.keymap.set('n', '<leader>Tp', ':tabp<CR>', { noremap = true, silent = true, 
 -- Переключение переноса строк
 vim.keymap.set('n', '<leader>tl', '<cmd>set wrap!<CR>', { noremap = true, silent = true, desc = 'Переключить перенос строк' })
 
+-- Переключение относительных строк
+vim.keymap.set(
+  'n',
+  '<leader>tr',
+  '<cmd>set relativenumber!<CR>',
+  { noremap = true, silent = true, desc = 'Переключить режим относительных строк' }
+)
+
 -- Сохранение режима отступа
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true, desc = 'Сдвиг выделения влево' })
 vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true, desc = 'Сдвиг выделения вправо' })
