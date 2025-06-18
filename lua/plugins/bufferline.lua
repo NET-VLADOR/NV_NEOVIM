@@ -22,14 +22,18 @@ return {
         max_name_length = 30, -- Макс. длина имени буфера
         max_prefix_length = 30, -- Макс. длина префикса при дедупликации
         tab_size = 20, -- Ширина вкладки
-        diagnostics = true, -- Интеграция с диагностикой (lsp и т.п.)
+        diagnostics = 'nvim_lsp', -- Интеграция с диагностикой (lsp и т.п.)
+        diagnostics_indicator = function(count, level)
+          local icon = level:match 'error' and ' ' or ' '
+          return ' ' .. icon .. count
+        end,
         diagnostics_update_in_insert = false, -- Обновлять диагностику в режиме insert
         color_icons = true, -- Раскрашивать иконки в цвет типа файла
         show_buffer_icons = true, -- Показывать иконки буферов
         show_buffer_close_icons = true, -- Показывать иконки закрытия
         show_close_icon = true, -- Показывать общую иконку закрытия
         persist_buffer_sort = true, -- Сохранять порядок сортировки буферов
-        separator_style = { '│', '│' }, -- Стиль разделителей: можно использовать "thick", "thin" или кастомные символы
+        separator_style = 'slant', -- Стиль разделителей: можно использовать "thick", "thin" или кастомные символы
         enforce_regular_tabs = true, -- Выравнивать ширину вкладок
         always_show_bufferline = true, -- Всегда показывать панель буферов
         show_tab_indicators = false, -- Показывать индикаторы вкладок
@@ -49,11 +53,13 @@ return {
             separator = true,
           },
         },
+        hover = {
+          enabled = true,
+          delay = 200,
+          reveal = { 'close' },
+        },
       },
       highlights = {
-        separator = {
-          fg = '#9399b2', -- Цвет разделителя (HEX-код)
-        },
         buffer_selected = {
           bold = true, -- Жирный шрифт для активного буфера
           italic = false, -- Курсив для активного буфера (отключен)

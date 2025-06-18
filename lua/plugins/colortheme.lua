@@ -4,8 +4,8 @@ return {
   name = 'catppuccin',
   priority = 1000,
   config = function()
-    -- Состояние прозрачности (по умолчанию включено)
-    local bg_transparent = true
+    -- Состояние прозрачности (по умолчанию выключено)
+    local bg_transparent = false
 
     -- Базовые настройки темы
     local catppuccin_config = {
