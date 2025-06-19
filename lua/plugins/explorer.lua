@@ -96,21 +96,69 @@ return {
       hijack_netrw = true,
       hijack_cursor = false,
       hijack_unnamed_buffer_when_opening = false,
-      open_on_tab = false,
-      sort_by = 'name',
-      update_cwd = false,
       on_attach = my_on_attach, -- Подключаем русифицированные маппинги
+      tab = {
+        sync = {
+          open = true,
+          ignore = {},
+        },
+      },
+      sync_root_with_cwd = true,
+      sort = {
+        sorter = 'name',
+      },
+      ui = {
+        confirm = {
+          trash = true,
+        },
+      },
       view = {
-        width = 30,
+        debounce_delay = 50,
+        width = {
+          min = 25, -- Минимальная ширина (25-40% экрана)
+          max = 45, -- Максимальная ширина (не более 50%)
+          padding = 2, -- Отступ от краев
+        },
         side = 'left',
         preserve_window_proportions = false,
         number = false,
         relativenumber = false,
-        signcolumn = 'yes',
+        signcolumn = 'no',
       },
       renderer = {
-        highlight_hidden = 'all',
-        hidden_display = 'all',
+        full_name = true,
+        highlight_git = 'name', -- Подсветка и иконки, и названий для Git
+        highlight_hidden = 'name', -- Подсветка только иконок для скрытых файлов
+        hidden_display = function(hidden_stats)
+          local total = 0
+          local parts = {}
+
+          -- Перевод причин скрытия на русский
+          local reasons = {
+            bookmark = 'закладки',
+            buf = 'буферы',
+            custom = 'пользовательские',
+            dotfile = 'dot-файлы',
+            git = 'git',
+            live_filter = 'фильтр',
+          }
+
+          -- Сбор статистики
+          for reason, count in pairs(hidden_stats) do
+            if count > 0 then
+              total = total + count
+              table.insert(parts, reasons[reason] .. ': ' .. count)
+            end
+          end
+
+          if total > 0 then
+            return 'Скрыто: ' .. total .. ' (' .. table.concat(parts, ', ') .. ')'
+          end
+          return nil
+        end,
+        root_folder_label = function(path)
+          return vim.fn.fnamemodify(path, ':t') -- Пример: "my-project"
+        end,
         indent_markers = {
           enable = true,
           icons = {
@@ -120,7 +168,18 @@ return {
           },
         },
         icons = {
-          webdev_colors = true,
+          padding = ' ',
+          web_devicons = {
+            file = {
+              enable = true,
+              color = true,
+            },
+            folder = {
+              enable = true,
+              color = true,
+            },
+          },
+          diagnostics_placement = 'before',
           glyphs = {
             git = {
               unstaged = '󰄱',
@@ -140,7 +199,7 @@ return {
       },
       update_focused_file = {
         enable = true,
-        update_cwd = false,
+        update_root = false,
         ignore_list = {},
       },
       system_open = {
@@ -158,13 +217,13 @@ return {
         },
       },
       filters = {
+        git_ignored = true,
         dotfiles = true,
         custom = {},
         exclude = {},
       },
       git = {
         enable = true,
-        ignore = true,
         timeout = 400,
       },
       actions = {
@@ -176,7 +235,8 @@ return {
         },
         open_file = {
           quit_on_open = false,
-          resize_window = false,
+          resize_window = true,
+          relative_path = true,
           window_picker = {
             enable = true,
             chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
@@ -186,10 +246,6 @@ return {
             },
           },
         },
-      },
-      trash = {
-        cmd = 'trash',
-        require_confirm = true,
       },
       log = {
         enable = false,
