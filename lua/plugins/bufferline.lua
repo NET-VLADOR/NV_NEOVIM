@@ -7,12 +7,16 @@ return {
     'nvim-tree/nvim-web-devicons', -- Иконки для буферов (требует Nerd Font)
   },
   config = function()
-    require('bufferline').setup {
+    local bufferline = require 'bufferline'
+    bufferline.setup {
       options = {
         mode = 'buffers', -- Режим отображения: "buffers" (буферы) или "tabs" (вкладки)
+        style_preset = bufferline.style_preset.default,
         themable = true, -- Разрешает переопределение цветовых групп
         numbers = 'none', -- Нумерация: "none" (нет), "ordinal" (порядковая), "buffer_id" (ID), "both" (оба), или функция
         close_command = 'Bdelete! %d', -- Команда закрытия буфера (можно использовать функцию)
+        right_mouse_command = nil, -- can be a string | function | false, see "Mouse actions"
+        middle_mouse_command = 'Bdelete! %d',
         buffer_close_icon = '', -- Иконка закрытия буфера
         close_icon = '', -- Общая иконка закрытия
         path_components = 1, -- Количество отображаемых компонентов пути (1 = только имя файла)
@@ -33,12 +37,13 @@ return {
         show_buffer_close_icons = true, -- Показывать иконки закрытия
         show_close_icon = true, -- Показывать общую иконку закрытия
         persist_buffer_sort = true, -- Сохранять порядок сортировки буферов
-        separator_style = 'slant', -- Стиль разделителей: можно использовать "thick", "thin" или кастомные символы
+        separator_style = { '', '' }, -- Стиль разделителей: можно использовать "thick", "thin" или кастомные символы
         enforce_regular_tabs = true, -- Выравнивать ширину вкладок
         always_show_bufferline = true, -- Всегда показывать панель буферов
         show_tab_indicators = false, -- Показывать индикаторы вкладок
         indicator = {
-          style = 'none', -- Стиль индикатора: 'icon' (иконка), 'underline' (подчёркивание), 'none' (отсутствует)
+          icon = '▎',
+          style = 'icon', -- Стиль индикатора: 'icon' (иконка), 'underline' (подчёркивание), 'none' (отсутствует)
         },
         icon_pinned = '󰐃', -- Иконка для закреплённых буферов
         minimum_padding = 1, -- Минимальный отступ между элементами
@@ -55,7 +60,7 @@ return {
         },
         hover = {
           enabled = true,
-          delay = 200,
+          delay = 100,
           reveal = { 'close' },
         },
       },
@@ -68,7 +73,9 @@ return {
         -- separator_selected = {},  -- Стиль разделителя для активного буфера
         -- tab_selected = {},        -- Стиль активной вкладки
         -- background = {},          -- Стиль фона неактивных буферов
-        -- indicator_selected = {},  -- Стиль индикатора для активного буфера
+        indicator_selected = {
+          fg = '#cba6f7',
+        }, -- Стиль индикатора для активного буфера
         -- fill = {},                -- Стиль заполнения пустого пространства
       },
     }
