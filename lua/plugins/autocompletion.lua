@@ -11,6 +11,14 @@ return {
     -- опционально: предоставляет сниппеты для источника сниппетов
     dependencies = {
       'rafamadriz/friendly-snippets',
+      {
+        'L3MON4D3/LuaSnip',
+        version = 'v2.*',
+        config = function()
+          require('luasnip.loaders.from_vscode').lazy_load()
+          require('luasnip').filetype_extend('typescript', { 'typescriptreact', 'javascript' })
+        end,
+      },
     },
     version = '1.*',
     ---@module 'blink.cmp'
@@ -42,10 +50,10 @@ return {
       -- (По умолчанию) Документация только при ручном вызове
       completion = {
         menu = { border = 'rounded', draw = { columns = { { 'kind_icon', 'label', 'label_description', gap = 2 }, { 'kind' } } } },
+        ghost_text = { enabled = true },
         documentation = { auto_show = true },
       },
-      signature = { enabled = true },
-
+      snippets = { preset = 'luasnip' },
       -- Стандартный список источников для расширения
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
