@@ -5,6 +5,9 @@ return {
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
+  keys = {
+    { '<leader>e', '<cmd>NvimTreeToggle<CR>', desc = 'Переключить видимость Nvim-tree' },
+  },
   config = function()
     -- Функция для русификации описаний команд
     local function my_on_attach(bufnr)
@@ -157,7 +160,7 @@ return {
           return nil
         end,
         root_folder_label = function(path)
-          return vim.fn.fnamemodify(path, ':t') -- Пример: "my-project"
+          return './' .. vim.fn.fnamemodify(path, ':t')
         end,
         indent_markers = {
           enable = true,
@@ -260,10 +263,5 @@ return {
         },
       },
     }
-
-    vim.keymap.set('n', '<space>e', require('nvim-tree.api').tree.toggle, {
-      silent = true,
-      desc = 'Переключить видимость Nvim-tree',
-    })
   end,
 }

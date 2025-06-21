@@ -1,12 +1,10 @@
 return {
-  -- https://github.com/nvim-treesitter/nvim-treesitter
   'nvim-treesitter/nvim-treesitter',
-  build = ':TSUpdate', -- Команда обновления парсеров
+  build = ':TSUpdate',
   config = function()
     local configs = require 'nvim-treesitter.configs'
 
     configs.setup {
-      -- Список языков для установки
       ensure_installed = {
         'lua',
         'javascript',
@@ -29,21 +27,14 @@ return {
         'css',
         'html',
       },
-
-      -- Автоустановка отсутствующих парсеров
       auto_install = true,
       sync_install = false,
-
-      -- Настройки подсветки
       highlight = {
-        enable = true, -- Включить подсветку синтаксиса
+        enable = true,
       },
-
-      -- Настройки автоотступов
       indent = {
-        enable = true, -- Включить автоотступы
+        enable = true,
       },
-
       incremental_selection = {
         enable = true,
         keymaps = {
@@ -54,9 +45,5 @@ return {
         },
       },
     }
-    -- Примечание: Дополнительные модули Treesitter:
-    --   - Инкрементальное выделение (встроено)
-    --   - Показ контекста: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --   - Текстобъекты: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   end,
 }

@@ -1,55 +1,55 @@
 return {
-  -- https://github.com/akinsho/bufferline.nvim
   'akinsho/bufferline.nvim',
   dependencies = {
-    -- https://github.com/moll/vim-bbye
-    'moll/vim-bbye', -- Для корректного закрытия буферов без нарушения работы Neovim
-    'nvim-tree/nvim-web-devicons', -- Иконки для буферов (требует Nerd Font)
+    'moll/vim-bbye',
+    'nvim-tree/nvim-web-devicons',
   },
   config = function()
     local bufferline = require 'bufferline'
+    local palette = require('catppuccin.palettes').get_palette()
+
     bufferline.setup {
       options = {
-        mode = 'buffers', -- Режим отображения: "buffers" (буферы) или "tabs" (вкладки)
+        mode = 'buffers',
         style_preset = bufferline.style_preset.default,
-        themable = true, -- Разрешает переопределение цветовых групп
-        numbers = 'none', -- Нумерация: "none" (нет), "ordinal" (порядковая), "buffer_id" (ID), "both" (оба), или функция
-        close_command = 'Bdelete! %d', -- Команда закрытия буфера (можно использовать функцию)
-        right_mouse_command = nil, -- can be a string | function | false, see "Mouse actions"
+        themable = true,
+        numbers = 'none',
+        close_command = 'Bdelete! %d',
+        right_mouse_command = nil,
         middle_mouse_command = 'Bdelete! %d',
-        buffer_close_icon = '', -- Иконка закрытия буфера
-        close_icon = '', -- Общая иконка закрытия
-        path_components = 1, -- Количество отображаемых компонентов пути (1 = только имя файла)
-        modified_icon = '●', -- Иконка для изменённых буферов
-        left_trunc_marker = '', -- Маркер обрезания списка слева
-        right_trunc_marker = '', -- Маркер обрезания списка справа
-        max_name_length = 30, -- Макс. длина имени буфера
-        max_prefix_length = 30, -- Макс. длина префикса при дедупликации
-        tab_size = 20, -- Ширина вкладки
-        diagnostics = 'nvim_lsp', -- Интеграция с диагностикой (lsp и т.п.)
+        buffer_close_icon = '',
+        close_icon = '',
+        path_components = 1,
+        modified_icon = '●',
+        left_trunc_marker = '',
+        right_trunc_marker = '',
+        max_name_length = 30,
+        max_prefix_length = 30,
+        tab_size = 20,
+        diagnostics = 'nvim_lsp',
         diagnostics_indicator = function(count, level)
           local icon = level:match 'error' and ' ' or ' '
           return ' ' .. icon .. count
         end,
-        diagnostics_update_in_insert = false, -- Обновлять диагностику в режиме insert
-        color_icons = true, -- Раскрашивать иконки в цвет типа файла
-        show_buffer_icons = true, -- Показывать иконки буферов
-        show_buffer_close_icons = true, -- Показывать иконки закрытия
-        show_close_icon = true, -- Показывать общую иконку закрытия
-        persist_buffer_sort = true, -- Сохранять порядок сортировки буферов
-        separator_style = { '', '' }, -- Стиль разделителей: можно использовать "thick", "thin" или кастомные символы
-        enforce_regular_tabs = true, -- Выравнивать ширину вкладок
-        always_show_bufferline = true, -- Всегда показывать панель буферов
-        show_tab_indicators = false, -- Показывать индикаторы вкладок
+        diagnostics_update_in_insert = false,
+        color_icons = true,
+        show_buffer_icons = true,
+        show_buffer_close_icons = true,
+        show_close_icon = true,
+        persist_buffer_sort = true,
+        separator_style = { '', '' },
+        enforce_regular_tabs = true,
+        always_show_bufferline = true,
+        show_tab_indicators = false,
         indicator = {
           icon = '▎',
-          style = 'icon', -- Стиль индикатора: 'icon' (иконка), 'underline' (подчёркивание), 'none' (отсутствует)
+          style = 'icon',
         },
-        icon_pinned = '󰐃', -- Иконка для закреплённых буферов
-        minimum_padding = 1, -- Минимальный отступ между элементами
-        maximum_padding = 5, -- Максимальный отступ между элементами
-        maximum_length = 15, -- Максимальное количество отображаемых элементов
-        sort_by = 'insert_at_end', -- Сортировка: "insert_at_end" (по порядку добавления), "id" (по ID), "extension" (по расширению) и др.
+        icon_pinned = '󰐃',
+        minimum_padding = 1,
+        maximum_padding = 5,
+        maximum_length = 15,
+        sort_by = 'insert_at_end',
         offsets = {
           {
             filetype = 'NvimTree',
@@ -66,17 +66,12 @@ return {
       },
       highlights = {
         buffer_selected = {
-          bold = true, -- Жирный шрифт для активного буфера
-          italic = false, -- Курсив для активного буфера (отключен)
+          bold = true,
+          italic = false,
         },
-        -- Дополнительные кастомные стили (примеры):
-        -- separator_selected = {},  -- Стиль разделителя для активного буфера
-        -- tab_selected = {},        -- Стиль активной вкладки
-        -- background = {},          -- Стиль фона неактивных буферов
         indicator_selected = {
-          fg = '#cba6f7',
-        }, -- Стиль индикатора для активного буфера
-        -- fill = {},                -- Стиль заполнения пустого пространства
+          fg = palette.mauve,
+        },
       },
     }
   end,

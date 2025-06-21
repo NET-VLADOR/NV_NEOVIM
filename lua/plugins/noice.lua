@@ -1,73 +1,53 @@
 return {
-  -- https://github.com/folke/noice.nvim
   'folke/noice.nvim',
-  event = 'VeryLazy', -- Ленивая загрузка при первом использовании
-  opts = {
-    -- Здесь можно добавить дополнительные опции плагина
-  },
+  event = 'VeryLazy',
+  opts = {},
   dependencies = {
-    -- Обязательная зависимость (добавляем module для корректной ленивой загрузки)
-    { 'MunifTanjim/nui.nvim', module = 'nui' },
 
-    -- ОПЦИОНАЛЬНО:
-    --   `nvim-notify` нужен только для использования красивого вида уведомлений
-    --   Если не установлен, будет использован минималистичный fallback
+    { 'MunifTanjim/nui.nvim', module = 'nui' },
     { 'rcarriga/nvim-notify', module = 'notify' },
   },
   config = function()
     require('noice').setup {
       views = {
-        -- Настройки всплывающей командной строки
         cmdline_popup = {
           position = {
-            row = '50%', -- Позиция по вертикали (центр экрана)
-            col = '50%', -- Позиция по горизонтали (центр экрана)
+            row = '50%',
+            col = '50%',
           },
           size = {
-            width = 60, -- Ширина окна
-            height = 'auto', -- Автовысота под содержимое
+            width = 60,
+            height = 'auto',
           },
         },
-        -- Настройки всплывающего меню автодополнения
         popupmenu = {
-          relative = 'editor', -- Относительно всего редактора
+          relative = 'editor',
           position = {
-            row = '67%', -- 2/3 высоты экрана
-            col = '50%', -- Центр по горизонтали
+            row = '67%',
+            col = '50%',
           },
           size = {
-            width = 60, -- Фиксированная ширина
-            height = 10, -- Фиксированная высота
+            width = 60,
+            height = 10,
           },
           border = {
-            style = 'rounded', -- Закругленные углы
-            padding = { 0, 1 }, -- Отступы: вертикальный 0, горизонтальный 1
+            style = 'rounded',
+            padding = { 0, 1 },
           },
-          -- Стилизация окна
           win_options = {
             winhighlight = {
-              Normal = 'Normal', -- Стандартный стиль содержимого
-              FloatBorder = 'DiagnosticInfo', -- Стиль границы (синий)
+              Normal = 'Normal',
+              FloatBorder = 'DiagnosticInfo',
             },
           },
         },
       },
-      -- Дополнительные настройки (можно добавить):
-      -- routes = {},    -- Пользовательские маршруты сообщений
-      -- commands = {},  -- Кастомизация команд
-      -- presets = {     -- Предустановки поведения
-      --   lsp_doc_border = true,  -- Границы для LSP документации
-      -- },
     }
 
-    -- Дополнительная настройка плагина уведомлений
     require('notify').setup {
-      background_colour = '#000000', -- Чёрный фон для уведомлений
-      timeout = 2000, -- Время показа уведомления (мс)
+      background_colour = '#000000',
+      timeout = 2000,
       merge_duplicates = true,
-      -- Другие полезные опции:
-      -- max_width = 80,             -- Максимальная ширина уведомления
-      -- render = 'minimal'          -- Стиль рендеринга (minimal/simple)
     }
   end,
 }

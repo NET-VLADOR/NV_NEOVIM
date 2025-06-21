@@ -1,12 +1,8 @@
 return {
-  -- Подсказки клавиатурных сочетаний
-  -- https://github.com/folke/which-key.nvim
   'folke/which-key.nvim',
   config = function()
     local wk = require 'which-key'
-    ---@diagnostic disable-next-line: missing-fields
     wk.setup {
-      preset = 'modern',
       timeoutlen = 1500,
       show_help = true,
       icons = {

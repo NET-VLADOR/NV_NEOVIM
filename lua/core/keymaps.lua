@@ -2,87 +2,85 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+local map = function(keys, func, desc, mode)
+  mode = mode or 'n'
+  vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
+end
+
+-- Выход из режима форматирования
+map('jk', '<ESC>', 'Вернуться в НОРМАЛЬНЫЙ режим', 'i')
+
 -- Отключение стандартного поведения пробела в Normal и Visual режимах
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+map('<Space>', '<Nop>', 'Сброс пробела', { 'n', 'v' })
 
 -- Сохранение файла
-vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', { noremap = true, silent = true, desc = 'Сохранить файл' })
+map('<C-s>', '<cmd> w <CR>', 'Сохранить файл')
 
 -- Сохранение без автоформатирования
-vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', { noremap = true, silent = true, desc = 'Сохранить без форматирования' })
+map('<leader>sn', '<cmd>noautocmd w <CR>', 'Сохранить без форматирования')
 
 -- Закрытие файла
-vim.keymap.set('n', '<C-q>', '<cmd> q <CR>', { noremap = true, silent = true, desc = 'Закрыть файл' })
+map('<C-q>', '<cmd> q <CR>', 'Закрыть файл')
 
 -- Удаление символа без копирования в регистр
-vim.keymap.set('n', 'x', '"_x', { noremap = true, silent = true, desc = 'Удалить символ (без буфера)' })
+map('x', '"_x', 'Удалить символ (без буфера)')
 
 -- Вертикальная прокрутка с центрированием
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true, desc = 'Прокрутка вниз с центрированием' })
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true, desc = 'Прокрутка вверх с центрированием' })
+map('<C-d>', '<C-d>zz', 'Прокрутка вниз с центрированием')
+map('<C-u>', '<C-u>zz', 'Прокрутка вверх с центрированием')
 
 -- Поиск с центрированием
-vim.keymap.set('n', 'n', 'nzzzv', { noremap = true, silent = true, desc = 'Следующий результат поиска (центр.)' })
-vim.keymap.set('n', 'N', 'Nzzzv', { noremap = true, silent = true, desc = 'Предыдущий результат поиска (центр.)' })
+map('n', 'nzzzv', 'Следующий результат поиска (центр.)')
+map('N', 'Nzzzv', 'Предыдущий результат поиска (центр.)')
 
 -- Изменение размеров окон
-vim.keymap.set('n', '<Down>', ':resize -2<CR>', { noremap = true, silent = true, desc = 'Уменьшить высоту окна' })
-vim.keymap.set('n', '<Up>', ':resize +2<CR>', { noremap = true, silent = true, desc = 'Увеличить высоту окна' })
-vim.keymap.set('n', '<Right>', ':vertical resize -2<CR>', { noremap = true, silent = true, desc = 'Уменьшить ширину окна' })
-vim.keymap.set('n', '<Left>', ':vertical resize +2<CR>', { noremap = true, silent = true, desc = 'Увеличить ширину окна' })
+map('<Down>', ':resize -2<CR>', 'Уменьшить высоту окна')
+map('<Up>', ':resize +2<CR>', 'Увеличить высоту окна')
+map('<Right>', ':vertical resize -2<CR>', 'Уменьшить ширину окна')
+map('<Left>', ':vertical resize +2<CR>', 'Увеличить ширину окна')
 
 -- Управление буферами
-vim.keymap.set('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true, desc = 'Следующий буфер' })
-vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true, desc = 'Предыдущий буфер' })
-vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', { noremap = true, silent = true, desc = 'Закрыть текущий буфер' })
-vim.keymap.set('n', '<leader>nb', '<cmd> enew <CR>', { noremap = true, silent = true, desc = 'Создать новый буфер' })
+map('<Tab>', ':bnext<CR>', 'Следующий буфер')
+map('<S-Tab>', ':bprevious<CR>', 'Предыдущий буфер')
+map('<leader>x', ':bdelete!<CR>', 'Закрыть текущий буфер')
+map('<leader>nb', '<cmd> enew <CR>', 'Создать новый буфер')
 
 -- Управление окнами
-vim.keymap.set('n', '<leader>wv', '<C-w>v', { noremap = true, silent = true, desc = 'Вертикальное разделение окна' })
-vim.keymap.set('n', '<leader>wh', '<C-w>s', { noremap = true, silent = true, desc = 'Горизонтальное разделение окна' })
-vim.keymap.set('n', '<leader>we', '<C-w>=', { noremap = true, silent = true, desc = 'Выровнять размеры окон' })
-vim.keymap.set('n', '<leader>wx', ':close<CR>', { noremap = true, silent = true, desc = 'Закрыть текущее окно' })
+map('<leader>wv', '<C-w>v', 'Вертикальное разделение окна')
+map('<leader>wh', '<C-w>s', 'Горизонтальное разделение окна')
+map('<leader>we', '<C-w>=', 'Выровнять размеры окон')
+map('<leader>wx', ':close<CR>', 'Закрыть текущее окно')
 
 -- Навигация между окнами
-vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', { noremap = true, silent = true, desc = 'Перейти в верхнее окно' })
-vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', { noremap = true, silent = true, desc = 'Перейти в нижнее окно' })
-vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent = true, desc = 'Перейти в левое окно' })
-vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent = true, desc = 'Перейти в правое окно' })
+map('<C-k>', ':wincmd k<CR>', 'Перейти в верхнее окно')
+map('<C-j>', ':wincmd j<CR>', 'Перейти в нижнее окно')
+map('<C-h>', ':wincmd h<CR>', 'Перейти в левое окно')
+map('<C-l>', ':wincmd l<CR>', 'Перейти в правое окно')
 
 -- Управление вкладками
-vim.keymap.set('n', '<leader>To', ':tabnew<CR>', { noremap = true, silent = true, desc = 'Новая вкладка' })
-vim.keymap.set('n', '<leader>Tx', ':tabclose<CR>', { noremap = true, silent = true, desc = 'Закрыть текущую вкладку' })
-vim.keymap.set('n', '<leader>Tn', ':tabn<CR>', { noremap = true, silent = true, desc = 'Следующая вкладка' })
-vim.keymap.set('n', '<leader>Tp', ':tabp<CR>', { noremap = true, silent = true, desc = 'Предыдущая вкладка' })
+map('<leader>To', ':tabnew<CR>', 'Новая вкладка')
+map('<leader>Tx', ':tabclose<CR>', 'Закрыть текущую вкладку')
+map('<leader>Tn', ':tabn<CR>', 'Следующая вкладка')
+map('<leader>Tp', ':tabp<CR>', 'Предыдущая вкладка')
 
 -- Переключение переноса строк
-vim.keymap.set('n', '<leader>tl', '<cmd>set wrap!<CR>', { noremap = true, silent = true, desc = 'Переключить перенос строк' })
+map('<leader>tl', '<cmd>map wrap!<CR>', 'Переключить перенос строк')
 
 -- Переключение относительных строк
-vim.keymap.set(
-  'n',
-  '<leader>tr',
-  '<cmd>set relativenumber!<CR>',
-  { noremap = true, silent = true, desc = 'Переключить режим относительных строк' }
-)
+map('<leader>tr', '<cmd>set relativenumber!<CR>', 'Переключить режим относительных строк')
 
 -- Переключение видимости нажимаемых клавиш
-vim.keymap.set(
-  'n',
-  '<leader>ts',
-  '<cmd>ShowkeysToggle<CR>',
-  { noremap = true, silent = true, desc = 'Переключить видимость нажимаемых клавиш' }
-)
+map('<leader>ts', '<cmd>ShowkeysToggle<CR>', 'Переключить видимость нажимаемых клавиш')
 
 -- Сохранение режима отступа
-vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true, desc = 'Сдвиг выделения влево' })
-vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true, desc = 'Сдвиг выделения вправо' })
+map('<', '<gv', 'Сдвиг выделения влево', 'v')
+map('>', '>gv', 'Сдвиг выделения вправо', 'v')
 
 -- Сохранение последнего копирования при вставке
-vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true, desc = 'Вставить без перезаписи буфера' })
+map('p', '"_dP', 'Вставить без перезаписи буфера', 'v')
 
 -- Диагностические сочетания
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Перейти к предыдущей диагностике' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Перейти к следующей диагностике' })
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Показать диагностику во всплывающем окне' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Открыть список диагностик' })
+map('[d', vim.diagnostic.goto_prev, 'Перейти к предыдущей диагностике')
+map(']d', vim.diagnostic.goto_next, 'Перейти к следующей диагностике')
+map('<leader>d', vim.diagnostic.open_float, 'Показать диагностику во всплывающем окне')
+map('<leader>q', vim.diagnostic.setloclist, 'Открыть список диагностик')

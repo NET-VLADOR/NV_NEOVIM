@@ -1,26 +1,62 @@
 return {
-  -- https://github.com/nvim-lualine/lualine.nvim
   'nvim-lualine/lualine.nvim',
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    'catppuccin/nvim',
+  },
   config = function()
-    -- Настройка отображения текущего режима Vim
+    local catppuccin = require('catppuccin.palettes').get_palette()
+
+    local custom_catppuccin = {
+      normal = {
+        a = { bg = catppuccin.mauve, fg = catppuccin.crust, gui = 'bold' },
+        b = { bg = catppuccin.surface0, fg = catppuccin.text },
+        c = { bg = catppuccin.base, fg = catppuccin.subtext1 },
+      },
+      insert = {
+        a = { bg = catppuccin.green, fg = catppuccin.crust, gui = 'bold' },
+        b = { bg = catppuccin.surface0, fg = catppuccin.text },
+        c = { bg = catppuccin.base, fg = catppuccin.subtext1 },
+      },
+      visual = {
+        a = { bg = catppuccin.peach, fg = catppuccin.crust, gui = 'bold' },
+        b = { bg = catppuccin.surface0, fg = catppuccin.text },
+        c = { bg = catppuccin.base, fg = catppuccin.subtext1 },
+      },
+      replace = {
+        a = { bg = catppuccin.red, fg = catppuccin.crust, gui = 'bold' },
+        b = { bg = catppuccin.surface0, fg = catppuccin.text },
+        c = { bg = catppuccin.base, fg = catppuccin.subtext1 },
+      },
+      command = {
+        a = { bg = catppuccin.yellow, fg = catppuccin.crust, gui = 'bold' },
+        b = { bg = catppuccin.surface0, fg = catppuccin.text },
+        c = { bg = catppuccin.base, fg = catppuccin.subtext1 },
+      },
+      inactive = {
+        a = { bg = catppuccin.surface1, fg = catppuccin.overlay0 },
+        b = { bg = catppuccin.surface1, fg = catppuccin.overlay0 },
+        c = { bg = catppuccin.base, fg = catppuccin.overlay0 },
+      },
+    }
+
     local mode = {
       'mode',
       fmt = function(str)
-        return ' ' .. str -- Добавляем иконку перед названием режима
-        -- Альтернативный вариант: return ' ' .. str:sub(1, 1) -- Показывать только первую букву режима
+        return ' ' .. str
       end,
+      padding = { left = 1, right = 1 },
     }
 
-    -- Настройка отображения имени файла
     local filename = {
       'filename',
-      file_status = true, -- Показывать статус файла (только для чтения, изменен)
-      path = 1, -- 0 = только имя, 1 = относительный путь, 2 = абсолютный путь
+      file_status = true,
+      path = 1,
+      symbols = { modified = ' ', readonly = ' ' },
     }
 
-    -- Функция для скрытия компонентов на узких экранах
     local hide_in_width = function()
-      return vim.fn.winwidth(0) > 100 -- Показывать компонент только если ширина окна > 100 символов
+      return vim.fn.winwidth(0) > 120
     end
 
     local fileformat = {
@@ -30,68 +66,94 @@ return {
         dos = ' CRLF',
         mac = ' CR',
       },
-      cond = hide_in_width, -- Условие отображения (только на широких экранах)
+      cond = hide_in_width,
     }
 
-    -- Настройка отображения диагностики
     local diagnostics = {
       'diagnostics',
-      sources = { 'nvim_diagnostic' }, -- Источник диагностики
-      sections = { 'error', 'warn', 'info', 'hint' }, -- Показывать ошибки, предупреждения, информацию и подсказки
-      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' }, -- Иконки для диагностики
-      colored = true, -- Использовать цветовую подсветку
-      update_in_insert = false, -- Не обновлять в режиме вставки
-      always_visible = false, -- Не показывать постоянно
-      cond = hide_in_width, -- Условие отображения (только на широких экранах)
+      sources = { 'nvim_diagnostic' },
+      sections = { 'error', 'warn', 'info', 'hint' },
+      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+      colored = true,
+      update_in_insert = false,
+      always_visible = false,
+      cond = hide_in_width,
     }
 
-    -- Настройка отображения изменений в Git
     local diff = {
       'diff',
-      colored = true, -- Использовать цветовую подсветку
-      symbols = { added = ' ', modified = ' ', removed = ' ' }, -- Иконки для изменений
-      cond = hide_in_width, -- Условие отображения (только на широких экранах)
+      colored = true,
+      symbols = { added = ' ', modified = ' ', removed = ' ' },
+      cond = hide_in_width,
     }
 
-    -- Основная настройка lualine
     require('lualine').setup {
       options = {
-        icons_enabled = true, -- Включить иконки
-        theme = 'nord', -- Тема оформления
-        -- Полезные символы разделителей:
-        -- https://www.nerdfonts.com/cheat-sheet
-        --        
-        section_separators = { left = '', right = '' }, -- Разделители секций
-        component_separators = { left = '', right = '' }, -- Разделители компонентов
-        disabled_filetypes = { 'alpha', 'neo-tree' }, -- Отключить для указанных типов файлов
-        always_divide_middle = true, -- Всегда разделять среднюю секцию
+        icons_enabled = true,
+        theme = custom_catppuccin,
+        section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
+        disabled_filetypes = { 'alpha', 'neo-tree' },
+        always_divide_middle = true,
+        globalstatus = true,
       },
-      -- Активные секции (для обычных окон)
       sections = {
-        lualine_a = { mode }, -- Левый край: текущий режим
-        lualine_b = { 'branch' }, -- Ветка Git
-        lualine_c = { filename }, -- Имя файла/путь
-        lualine_x = { -- Правая часть (различная информация)
-          diagnostics, -- Диагностики
-          diff, -- Git diff
-          fileformat,
-          { 'encoding', cond = hide_in_width }, -- Кодировка файла
-          { 'filetype', cond = hide_in_width }, -- Тип файла
+        lualine_a = { mode },
+        lualine_b = {
+          {
+            'b:gitsigns_head',
+            icon = '',
+            color = { fg = catppuccin.blue },
+          },
         },
-        lualine_y = { 'location' }, -- Положение курсора (строка:столбец)
-        lualine_z = { 'progress' }, -- Прогресс (текущая/всего строк)
+        lualine_c = { filename },
+        lualine_x = {
+          diagnostics,
+          diff,
+          fileformat,
+          {
+            'encoding',
+            cond = hide_in_width,
+            color = { fg = catppuccin.peach },
+          },
+          {
+            'filetype',
+            cond = hide_in_width,
+            color = { fg = catppuccin.mauve },
+          },
+        },
+        lualine_y = {
+          {
+            'location',
+            color = { fg = catppuccin.green },
+          },
+        },
+        lualine_z = {
+          {
+            'progress',
+          },
+        },
       },
-      -- Неактивные секции (для неактивных окон)
       inactive_sections = {
-        lualine_a = {}, -- Пустая секция
-        lualine_b = {}, -- Пустая секция
-        lualine_c = { { 'filename', path = 1 } }, -- Только имя файла
-        lualine_x = { { 'location', padding = 0 } }, -- Положение курсора без отступов
-        lualine_y = {}, -- Пустая секция
-        lualine_z = {}, -- Пустая секция
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {
+          {
+            'filename',
+            path = 1,
+            color = { fg = catppuccin.overlay1 },
+          },
+        },
+        lualine_x = {
+          {
+            'location',
+            padding = 0,
+            color = { fg = catppuccin.overlay1 },
+          },
+        },
       },
-      tabline = {}, -- Не использовать строку вкладок
-      extensions = { 'fugitive' }, -- Поддержка плагина fugitive (Git)
+      tabline = {},
+      extensions = { 'fugitive', 'nvim-tree' },
     }
   end,
 }

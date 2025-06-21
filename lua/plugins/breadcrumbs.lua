@@ -1,6 +1,4 @@
 return {
-  -- Плагин для навигации по коду через "хлебные крошки"
-  -- https://github.com/Bekaboo/dropbar.nvim
   'Bekaboo/dropbar.nvim',
   dependencies = {
     'nvim-telescope/telescope-fzf-native.nvim',
@@ -9,7 +7,6 @@ return {
   config = function()
     local dropbar_api = require 'dropbar.api'
 
-    -- Настройка клавиатурных сочетаний
     vim.keymap.set('n', '<Leader>;', dropbar_api.pick, {
       desc = 'Поиск символов в строке навигации',
     })

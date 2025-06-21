@@ -1,6 +1,6 @@
 return {
-  -- https://github.com/stevearc/conform.nvim
   'stevearc/conform.nvim',
+  event = 'BufWritePre',
   opts = {
     formatters_by_ft = {
       lua = { 'stylua' },

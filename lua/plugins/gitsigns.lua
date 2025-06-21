@@ -1,22 +1,6 @@
 return {
-  -- https://github.com/lewis6991/gitsigns.nvim
   'lewis6991/gitsigns.nvim',
   opts = {
-    -- Раскомментировать если хочется видеть значки
-    -- signs = {
-    --   add = { text = '+' },
-    --   change = { text = '~' },
-    --   delete = { text = '_' },
-    --   topdelete = { text = '‾' },
-    --   changedelete = { text = '~' },
-    -- },
-    -- signs_staged = {
-    --   add = { text = '+' },
-    --   change = { text = '~' },
-    --   delete = { text = '_' },
-    --   topdelete = { text = '‾' },
-    --   changedelete = { text = '~' },
-    -- },
     on_attach = function(bufnr)
       local gitsigns = require 'gitsigns'
 
@@ -25,7 +9,6 @@ return {
         vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'Git: ' .. desc })
       end
 
-      -- Навигация по изменениям
       map(']c', function()
         if vim.wo.diff then
           vim.cmd.normal { ']c', bang = true }
@@ -42,8 +25,6 @@ return {
         end
       end, 'Перейти к предыдущему git-изменению (prev hunk)')
 
-      -- Действия с изменениями
-      -- Визуальный режим
       map('<leader>hs', function()
         gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, 'Добавить выделение в индекс (stage hunk)', 'v')

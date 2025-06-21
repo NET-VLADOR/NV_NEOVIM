@@ -2,7 +2,6 @@ return {
   -- Основная конфигурация LSP
   'neovim/nvim-lspconfig',
   dependencies = {
-    -- Автоматическая установка LSP-серверов и инструментов
     { 'williamboman/mason.nvim', opts = {} },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -17,18 +16,9 @@ return {
     },
   },
   config = function()
-    -- LSP (Language Server Protocol) - протокол для взаимодействия
-    -- редактора с языковыми серверами. Обеспечивает:
-    -- - Переход к определению
-    -- - Поиск ссылок
-    -- - Автодополнение
-    -- - Анализ кода и др.
-
-    -- Настройка обработчика прикрепления LSP к буферу
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
-        -- Вспомогательная функция для создания keymap
         local map = function(keys, func, desc, mode)
           mode = mode or 'n'
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
@@ -45,7 +35,7 @@ return {
         map('<leader>la', vim.lsp.buf.code_action, 'Код-действия', { 'n', 'x' })
         map('<leader>lD', vim.lsp.buf.declaration, 'Перейти к объявлению')
         map('K', vim.lsp.buf.hover, 'Показать документацию')
-        map('<leader>th', function() -- Переключение подсказок
+        map('<leader>th', function()
           vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
         end, 'Переключить подсказки в коде')
 
@@ -57,7 +47,6 @@ return {
           end
         end
 
-        -- Подсветка ссылок при удержании курсора
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
@@ -111,11 +100,9 @@ return {
       },
     }
 
-    -- Расширенные возможности для LSP
     local original_capabilities = vim.lsp.protocol.make_client_capabilities()
     local capabilities = require('blink-cmp').get_lsp_capabilities(original_capabilities)
 
-    -- Настройки языковых серверов
     local servers = {
       ts_ls = {}, -- TypeScript
       bashls = {}, --bash
@@ -138,15 +125,13 @@ return {
         },
       },
     }
-    -- Автоматическая установка серверов и инструментов
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
-      'stylua', -- Форматировщик Lua
+      'stylua',
       'prettierd',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-    -- Инициализация LSP-серверов
     require('mason-lspconfig').setup {
       ensure_installed = {},
       automatic_enable = true,

@@ -1,44 +1,118 @@
 return {
-  -- https://github.com/catppuccin/nvim
   'catppuccin/nvim',
   name = 'catppuccin',
   priority = 1000,
   config = function()
-    -- Состояние прозрачности (по умолчанию выключено)
-    local bg_transparent = false
-
-    -- Базовые настройки темы
-    local catppuccin_config = {
-      flavour = 'mocha', -- latte, frappe, macchiato, mocha
-      transparent_background = bg_transparent,
-      -- Добавьте другие настройки здесь
+    local catppuccin_state = {
+      flavour = vim.g.catppuccin_flavour,
+      transparent_background = false,
+      flavours = { 'latte', 'frappe', 'macchiato', 'mocha' },
     }
 
-    -- Применение конфигурации
-    require('catppuccin').setup(catppuccin_config)
-    vim.cmd.colorscheme 'catppuccin'
-
-    -- Функция переключения прозрачности
-    local function toggle_transparency()
-      bg_transparent = not bg_transparent
-
-      -- Обновляем конфиг
-      catppuccin_config.transparent_background = bg_transparent
-      require('catppuccin').setup(catppuccin_config)
-
-      -- Перезагружаем тему
+    local function setup_catppuccin()
+      require('catppuccin').setup {
+        flavour = catppuccin_state.flavour,
+        transparent_background = catppuccin_state.transparent_background,
+        integrations = {
+          alpha = true,
+          notify = true,
+          telescope = true,
+          which_key = true,
+          neotree = true,
+          lsp_trouble = true,
+          cmp = true,
+          gitsigns = true,
+          treesitter = true,
+        },
+      }
       vim.cmd.colorscheme 'catppuccin'
+    end
 
-      -- Опционально: уведомление о состоянии
-      local state = bg_transparent and 'ВКЛ' or 'ВЫКЛ'
+    setup_catppuccin()
+
+    local function toggle_transparency()
+      catppuccin_state.transparent_background = not catppuccin_state.transparent_background
+      setup_catppuccin()
+
+      local state = catppuccin_state.transparent_background and 'ВКЛ' or 'ВЫКЛ'
       print('Прозрачный фон: ' .. state)
     end
 
-    -- Назначение горячей клавиши
+    local function switch_flavour(flavour)
+      catppuccin_state.flavour = flavour
+      vim.g.catppuccin_flavour = flavour
+      setup_catppuccin()
+      print('Тема изменена на: ' .. flavour:gsub('^%l', string.upper))
+    end
+
+    local function show_flavour_menu()
+      vim.ui.select(catppuccin_state.flavours, {
+        prompt = 'Выберите тему Catppuccin:',
+        format_item = function(item)
+          return item:gsub('^%l', string.upper)
+        end,
+      }, function(choice)
+        if choice then
+          switch_flavour(choice)
+        end
+      end)
+    end
+
     vim.keymap.set('n', '<leader>tt', toggle_transparency, {
       noremap = true,
       silent = true,
       desc = 'Переключить прозрачность фона',
+    })
+
+    vim.keymap.set('n', '<leader>tc', show_flavour_menu, {
+      noremap = true,
+      silent = true,
+      desc = 'Выбрать тему Catppuccin',
+    })
+
+    vim.keymap.set('n', '<leader>tfl', function()
+      switch_flavour 'latte'
+    end, {
+      noremap = true,
+      silent = true,
+      desc = 'Тема: Latte (светлая)',
+    })
+
+    vim.keymap.set('n', '<leader>tff', function()
+      switch_flavour 'frappe'
+    end, {
+      noremap = true,
+      silent = true,
+      desc = 'Тема: Frappe',
+    })
+
+    vim.keymap.set('n', '<leader>tfm', function()
+      switch_flavour 'macchiato'
+    end, {
+      noremap = true,
+      silent = true,
+      desc = 'Тема: Macchiato',
+    })
+
+    vim.keymap.set('n', '<leader>tfM', function()
+      switch_flavour 'mocha'
+    end, {
+      noremap = true,
+      silent = true,
+      desc = 'Тема: Mocha (тёмная)',
+    })
+
+    vim.api.nvim_create_user_command('CatppuccinFlavour', function(opts)
+      if vim.tbl_contains(catppuccin_state.flavours, opts.args) then
+        switch_flavour(opts.args)
+      else
+        print('Доступные темы: ' .. table.concat(catppuccin_state.flavours, ', '))
+      end
+    end, {
+      nargs = 1,
+      complete = function()
+        return catppuccin_state.flavours
+      end,
     })
   end,
 }
