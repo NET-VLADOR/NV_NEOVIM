@@ -1,5 +1,4 @@
 return {
-  -- Основная конфигурация LSP
   'neovim/nvim-lspconfig',
   dependencies = {
     { 'williamboman/mason.nvim', opts = {} },
@@ -24,7 +23,6 @@ return {
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
-        -- Горячие клавиши:
         map('<leader>ld', require('telescope.builtin').lsp_definitions, 'Перейти к определению')
         map('<leader>lr', require('telescope.builtin').lsp_references, 'Найти ссылки')
         map('<leader>li', require('telescope.builtin').lsp_implementations, 'Перейти к реализации')

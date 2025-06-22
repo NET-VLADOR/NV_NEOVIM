@@ -40,7 +40,7 @@ return {
         nerd_font_variant = 'mono',
       },
       completion = {
-        menu = { border = 'rounded', draw = { columns = { { 'kind_icon', 'label', 'label_description', gap = 2 }, { 'kind' } } } },
+        menu = { border = 'none', draw = { columns = { { 'kind_icon', 'label', 'label_description', gap = 2 }, { 'kind' } } } },
         ghost_text = { enabled = true },
         documentation = { auto_show = true },
       },

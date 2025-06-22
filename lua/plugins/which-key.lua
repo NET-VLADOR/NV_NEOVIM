@@ -20,7 +20,7 @@ return {
       { '<leader>T', group = 'Табы', icon = ' ' },
       { '<leader>w', group = 'Окна', icon = ' ' },
       { '<leader>t', group = 'Переключить' },
-      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      { '<leader>g', group = 'Git Hunk', mode = { 'n', 'v' } },
       { '<leader>l', group = 'LSP', icon = '󰧑 ' },
       { '<leader>n', group = 'Создать', icon = '󰎔 ' },
     }

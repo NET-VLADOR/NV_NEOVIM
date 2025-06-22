@@ -23,7 +23,6 @@ return {
         }
       end
 
-      -- Стандартные маппинги с русскими описаниями
       vim.keymap.set('n', '<C-]>', api.tree.change_root_to_node, opts 'Перейти в директорию')
       vim.keymap.set('n', '<C-e>', api.node.open.replace_tree_buffer, opts 'Открыть в текущем буфере')
       vim.keymap.set('n', '<C-r>', api.fs.rename_sub, opts 'Переименовать (без имени)')
@@ -99,7 +98,7 @@ return {
       hijack_netrw = true,
       hijack_cursor = false,
       hijack_unnamed_buffer_when_opening = false,
-      on_attach = my_on_attach, -- Подключаем русифицированные маппинги
+      on_attach = my_on_attach,
       tab = {
         sync = {
           open = true,
@@ -118,9 +117,9 @@ return {
       view = {
         debounce_delay = 50,
         width = {
-          min = 25, -- Минимальная ширина (25-40% экрана)
-          max = 45, -- Максимальная ширина (не более 50%)
-          padding = 2, -- Отступ от краев
+          min = 25,
+          max = 45,
+          padding = 2,
         },
         side = 'left',
         preserve_window_proportions = false,
@@ -130,13 +129,11 @@ return {
       },
       renderer = {
         full_name = true,
-        highlight_git = 'name', -- Подсветка и иконки, и названий для Git
-        highlight_hidden = 'name', -- Подсветка только иконок для скрытых файлов
+        highlight_git = 'name',
+        highlight_hidden = 'name',
         hidden_display = function(hidden_stats)
           local total = 0
           local parts = {}
-
-          -- Перевод причин скрытия на русский
           local reasons = {
             bookmark = 'закладки',
             buf = 'буферы',
@@ -146,7 +143,6 @@ return {
             live_filter = 'фильтр',
           }
 
-          -- Сбор статистики
           for reason, count in pairs(hidden_stats) do
             if count > 0 then
               total = total + count
@@ -178,7 +174,7 @@ return {
               color = true,
             },
             folder = {
-              enable = true,
+              enable = false,
               color = true,
             },
           },

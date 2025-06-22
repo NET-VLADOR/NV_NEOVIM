@@ -1,4 +1,3 @@
--- Комментирование кода
 return {
   'numToStr/Comment.nvim',
   opts = {},

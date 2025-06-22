@@ -16,7 +16,7 @@ return {
           themable = true,
           numbers = 'none',
           close_command = 'Bdelete! %d',
-          right_mouse_command = nil,
+          right_mouse_command = 'vertical sbuffer %d',
           middle_mouse_command = 'Bdelete! %d',
           buffer_close_icon = '',
           close_icon = '',

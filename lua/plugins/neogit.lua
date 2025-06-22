@@ -6,6 +6,6 @@ return {
     'nvim-telescope/telescope.nvim',
   },
   keys = {
-    { '<leader>N', '<cmd>Neogit kind=floating<CR>', desc = 'Neogit: открыть плавающее окно' },
+    { '<leader>G', '<cmd>Neogit kind=floating<CR>', desc = 'Neogit: открыть плавающее окно' },
   },
 }

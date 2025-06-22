@@ -9,42 +9,40 @@ return {
         vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'Git: ' .. desc })
       end
 
-      map(']c', function()
+      map(']g', function()
         if vim.wo.diff then
-          vim.cmd.normal { ']c', bang = true }
+          vim.cmd.normal { ']g', bang = true }
         else
           gitsigns.nav_hunk 'next'
         end
       end, 'Перейти к следующему git-изменению (next hunk)')
 
-      map('[c', function()
+      map('[g', function()
         if vim.wo.diff then
-          vim.cmd.normal { '[c', bang = true }
+          vim.cmd.normal { '[g', bang = true }
         else
           gitsigns.nav_hunk 'prev'
         end
       end, 'Перейти к предыдущему git-изменению (prev hunk)')
 
-      map('<leader>hs', function()
+      map('<leader>gs', function()
         gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, 'Добавить выделение в индекс (stage hunk)', 'v')
-      map('<leader>hr', function()
+      map('<leader>gr', function()
         gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, 'Отменить изменения в выделении (reset hunk)', 'v')
 
-      -- Нормальный режим
-      map('<leader>hs', gitsigns.stage_hunk, 'Добавить кусок в индекс (stage hunk)')
-      map('<leader>hr', gitsigns.reset_hunk, 'Отменить изменения в куске (reset hunk)')
-      map('<leader>hS', gitsigns.stage_buffer, 'Добавить весь файл в индекс (stage buffer)')
-      map('<leader>hR', gitsigns.reset_buffer, 'Отменить все изменения в файле (reset buffer)')
-      map('<leader>hp', gitsigns.preview_hunk_inline, 'Просмотреть изменения в куске (preview hunk)')
-      map('<leader>hb', gitsigns.blame_line, 'Показать автора строки (git blame)')
-      map('<leader>hd', gitsigns.diffthis, 'Сравнить с индексом (diff index)')
-      map('<leader>hD', function()
+      map('<leader>gs', gitsigns.stage_hunk, 'Добавить кусок в индекс (stage hunk)')
+      map('<leader>gr', gitsigns.reset_hunk, 'Отменить изменения в куске (reset hunk)')
+      map('<leader>gS', gitsigns.stage_buffer, 'Добавить весь файл в индекс (stage buffer)')
+      map('<leader>gR', gitsigns.reset_buffer, 'Отменить все изменения в файле (reset buffer)')
+      map('<leader>gp', gitsigns.preview_hunk_inline, 'Просмотреть изменения в куске (preview hunk)')
+      map('<leader>gb', gitsigns.blame_line, 'Показать автора строки (git blame)')
+      map('<leader>gd', gitsigns.diffthis, 'Сравнить с индексом (diff index)')
+      map('<leader>gD', function()
         gitsigns.diffthis '@'
       end, 'Сравнить с последним коммитом (diff HEAD)')
 
-      -- Переключатели
       map('<leader>tb', gitsigns.toggle_current_line_blame, 'Переключить git blame для строки')
     end,
   },
