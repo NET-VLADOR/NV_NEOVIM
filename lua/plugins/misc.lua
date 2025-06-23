@@ -29,7 +29,7 @@ return {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = { signs = false },
+    opts = { signs = true },
   },
   {
     'norcalli/nvim-colorizer.lua',
@@ -38,14 +38,13 @@ return {
     end,
   },
   {
-    'karb94/neoscroll.nvim',
-    opts = {},
-  },
-  {
     'nvzone/showkeys',
     cmd = 'ShowkeysToggle',
     opts = {
       maxkeys = 5,
+    },
+    keys = {
+      { '<leader>ts', '<cmd>ShowkeysToggle<CR>', desc = 'Переключить видимость нажимаемых клавиш' },
     },
   },
   {

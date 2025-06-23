@@ -18,6 +18,7 @@ return {
     wk.add {
       { '<leader>;', group = 'Хлебные крошки', icon = ' ' },
       { '<leader>f', group = 'Поиск' },
+      { '<leader>x', group = 'Закрыть', icon = ' ' },
       { '<leader>T', group = 'Табы', icon = ' ' },
       { '<leader>w', group = 'Окна', icon = ' ' },
       { '<leader>t', group = 'Переключить' },
