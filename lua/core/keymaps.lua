@@ -56,9 +56,3 @@ map('<leader>tr', '<cmd>set relativenumber!<CR>', 'Переключить отн
 map('<', '<gv', 'Сдвиг выделения влево', 'v')
 map('>', '>gv', 'Сдвиг выделения вправо', 'v')
 map('p', '"_dP', 'Вставить без перезаписи буфера', 'v')
-
--- Диагностика
-map('[d', vim.diagnostic.goto_prev, 'Предыдущая диагностика')
-map(']d', vim.diagnostic.goto_next, 'Следующая диагностика')
-map('<leader>d', vim.diagnostic.open_float, 'Показать диагностику')
-map('<leader>q', vim.diagnostic.setloclist, 'Открыть список диагностик')

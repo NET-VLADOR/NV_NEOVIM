@@ -8,6 +8,7 @@ return {
     { 'rcarriga/nvim-notify', module = 'notify' },
   },
   config = function()
+    ---@diagnostic disable-next-line: missing-fields
     require('noice').setup {
       views = {
         cmdline_popup = {

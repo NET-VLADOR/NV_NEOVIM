@@ -2,33 +2,37 @@ return {
   'folke/snacks.nvim',
   priority = 1000,
   lazy = false,
-  opts = {
-    indent = { enabled = true },
-    notifier = { enabled = true },
-    scroll = { enabled = true },
-    image = { enabled = true },
-    terminal = {
-      win = {
-        style = 'terminal',
-        relative = 'editor',
-        position = 'bottom',
-        height = 0.1,
+  opts = {},
+  config = function()
+    require('snacks').setup {
+      indent = { enabled = true },
+      notifier = { enabled = true, style = 'fancy' },
+      scroll = { enabled = true },
+      image = { enabled = true },
+      terminal = {
+        win = {
+          style = 'terminal',
+          relative = 'editor',
+          position = 'bottom',
+          height = 0.15,
+        },
+        interactive = true,
       },
-      interactive = true, -- включить все интерактивные функции
-    },
-    statuscolumn = {
-      left = { 'mark', 'sign', 'git' },
-      right = { 'fold' },
-      folds = {
-        open = true,
-        git_hl = false,
+      statuscolumn = {
+        enabled = true,
+        left = { 'mark', 'sign', 'git' },
+        right = { 'fold' },
+        folds = {
+          open = true,
+          git_hl = false,
+        },
+        git = {
+          patterns = { 'GitSign' },
+        },
+        refresh = 50,
       },
-      git = {
-        patterns = { 'GitSign' },
-      },
-      refresh = 50,
-    },
-  },
+    }
+  end,
   keys = {
     {
       '<leader>xx',
