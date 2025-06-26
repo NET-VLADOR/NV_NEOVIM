@@ -10,7 +10,7 @@ return {
         mappings = true,
         rules = {
           { pattern = '[Пп]оиск', icon = ' ', color = 'blue' },
-          { pattern = 'диагностик', icon = ' ', color = 'red' },
+          { pattern = '[Дд]иагностик', icon = ' ', color = 'red' },
           { pattern = '[Пп]ереключить', icon = ' ', color = 'yellow' },
           { pattern = '[Gg]it', icon = ' ', color = 'red' },
         },
@@ -26,6 +26,7 @@ return {
       { '<leader>g', group = 'Git', mode = { 'n', 'v' } },
       { '<leader>l', group = 'LSP', icon = '󰧑 ' },
       { '<leader>n', group = 'Создать', icon = '󰎔 ' },
+      { '<leader>d', group = 'Диагностика' },
     }
   end,
 }
