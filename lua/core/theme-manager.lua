@@ -10,15 +10,10 @@ M.current = {
 M.subscribers = {}
 
 function M.setup()
-  M.reload_theme()
-end
-
-function M.reload_theme()
   require('catppuccin').setup {
     flavour = M.current.flavour,
     transparent_background = M.current.transparent,
     integrations = {
-      alpha = true,
       diffview = true,
       telescope = { enabled = true, style = 'nvchad' },
       dropbar = { enabled = true, color_mode = true },
@@ -33,11 +28,22 @@ function M.reload_theme()
       blink_cmp = true,
       gitsigns = true,
       treesitter = true,
+      notify = true,
     },
   }
 
   vim.cmd.colorscheme(M.current.name)
   M.current.palette = require('catppuccin.palettes').get_palette()
+
+  vim.cmd('highlight FloatBorder guifg=' .. M.current.palette.mauve)
+  vim.cmd('highlight NotifyINFOBorder guifg=' .. M.current.palette.mauve)
+  vim.cmd('highlight NotifyINFOTitle guifg=' .. M.current.palette.mauve)
+  vim.cmd('highlight BufferLineIndicatorSelected guifg=' .. M.current.palette.mauve)
+  vim.cmd('highlight SnacksNotifierTitleInfo guifg=' .. M.current.palette.mauve)
+  vim.cmd('highlight SnacksNotifierBorderInfo guifg=' .. M.current.palette.mauve)
+  vim.cmd('highlight SnacksDashboardHeader guifg=' .. M.current.palette.mauve)
+  vim.cmd('highlight SnacksDashboardDesc guifg=' .. M.current.palette.subtext0)
+  vim.cmd('highlight SnacksDashboardFooter guifg=' .. M.current.palette.blue)
 
   M.notify_subscribers()
 end
@@ -68,13 +74,13 @@ end
 
 function M.toggle_transparency()
   M.current.transparent = not M.current.transparent
-  M.reload_theme()
+  M.setup()
   print('Прозрачность: ' .. (M.current.transparent and 'ВКЛ' or 'ВЫКЛ'))
 end
 
 function M.set_flavour(flavour)
   M.current.flavour = flavour
-  M.reload_theme()
+  M.setup()
   print('Тема: ' .. flavour:gsub('^%l', string.upper))
 end
 

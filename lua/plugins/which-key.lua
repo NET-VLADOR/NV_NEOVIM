@@ -1,22 +1,20 @@
 return {
   'folke/which-key.nvim',
-  config = function()
-    local wk = require 'which-key'
-    ---@diagnostic disable-next-line: missing-fields
-    wk.setup {
-      timeoutlen = 1500,
-      show_help = true,
-      icons = {
-        mappings = true,
-        rules = {
-          { pattern = '[Пп]оиск', icon = ' ', color = 'blue' },
-          { pattern = '[Дд]иагностик', icon = ' ', color = 'red' },
-          { pattern = '[Пп]ереключить', icon = ' ', color = 'yellow' },
-          { pattern = '[Gg]it', icon = ' ', color = 'red' },
-        },
+  opts = {
+    preset = 'modern',
+    timeoutlen = 1500,
+    show_help = true,
+    win = { title = 'Горячие клавиши' },
+    icons = {
+      mappings = true,
+      rules = {
+        { pattern = '[Пп]оиск', icon = ' ', color = 'blue' },
+        { pattern = '[Дд]иагностик', icon = ' ', color = 'red' },
+        { pattern = '[Пп]ереключить', icon = ' ', color = 'yellow' },
+        { pattern = '[Gg]it', icon = ' ', color = 'red' },
       },
-    }
-    wk.add {
+    },
+    spec = {
       { '<leader>;', group = 'Хлебные крошки', icon = ' ' },
       { '<leader>f', group = 'Поиск' },
       { '<leader>x', group = 'Закрыть', icon = ' ' },
@@ -27,6 +25,6 @@ return {
       { '<leader>l', group = 'LSP', icon = '󰧑 ' },
       { '<leader>n', group = 'Создать', icon = '󰎔 ' },
       { '<leader>d', group = 'Диагностика' },
-    }
-  end,
+    },
+  },
 }

@@ -5,10 +5,6 @@ return {
   config = function()
     local theme = require 'core.theme-manager'
 
-    if vim.g.catppuccin_flavour then
-      theme.current.flavour = vim.g.catppuccin_flavour
-    end
-
     theme.setup()
 
     vim.keymap.set('n', '<leader>tt', theme.toggle_transparency, {

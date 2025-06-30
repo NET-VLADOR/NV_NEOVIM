@@ -35,6 +35,15 @@ return {
             end
           end,
         },
+        ['<C-,>'] = {
+          function(cmp)
+            if cmp.is_visible() then
+              cmp.cancel()
+            else
+              cmp.show()
+            end
+          end,
+        },
       },
       appearance = {
         nerd_font_variant = 'mono',
