@@ -76,7 +76,7 @@ return {
     map('<leader>fh', wrapper(builtin.help_tags, 'Справка'), 'Поиск в справке')
     map('<leader>fk', wrapper(builtin.keymaps, 'Горячие клавиши'), 'Поиск горячих клавиш')
     map('<leader>ff', wrapper(builtin.find_files, 'Файлы'), 'Поиск файлов')
-    map('<leader>fs', wrapper(builtin.builtin, 'Telescope'), 'Поиск в Telescope')
+    map('<leader>ft', wrapper(builtin.builtin, 'Telescope'), 'Поиск в Telescope')
     map('<leader>fw', wrapper(builtin.grep_string, 'Слово под курсором'), 'Поиск слова под курсором')
     map('<leader>fg', wrapper(builtin.live_grep, 'Слово'), 'Поиск слова')
     map('<leader>fd', wrapper(builtin.diagnostics, 'Диагностика'), 'Поиск диагностики')
