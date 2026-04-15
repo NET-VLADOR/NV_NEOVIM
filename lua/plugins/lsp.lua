@@ -102,18 +102,19 @@ return {
     local capabilities = require('blink-cmp').get_lsp_capabilities(original_capabilities)
 
     local servers = {
-      ts_ls = {}, -- TypeScript
-      bashls = {}, --bash
-      mdx_analyzer = {}, -- MDX
-      eslint = {}, --JavaScritp
-      html = { filetypes = { 'html', 'twig', 'hbs' } },
-      cssls = {}, -- CSS
-      tailwindcss = {}, -- Tailwind CSS
-      dockerls = {}, -- Docker
-      sqlls = {}, -- SQL
-      jsonls = {}, -- JSON
-      yamlls = {}, -- YAML
-      lua_ls = { -- Lua
+      ts_ls = {},
+      bashls = {},
+      mdx_analyzer = {},
+      eslint = {},
+      html = {},
+      rust_analyzer = {},
+      cssls = {},
+      tailwindcss = {},
+      dockerls = {},
+      sqlls = {},
+      jsonls = {},
+      yamlls = {},
+      lua_ls = {
         settings = {
           Lua = {
             completion = {

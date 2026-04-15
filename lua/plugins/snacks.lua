@@ -10,13 +10,13 @@ return {
       preset = {
         keys = {
           { icon = ' ', key = 'n', desc = 'Новый файл', action = ':ene | startinsert' },
-          { icon = ' ', key = 'f', desc = 'Найти файл', action = ':Telescope find_files' },
+          { icon = '󰈔 ', key = 'f', desc = 'Найти файл', action = ':Telescope find_files' },
           { icon = ' ', key = 'r', desc = 'Недавние файлы', action = ':Telescope oldfiles' },
           { icon = ' ', key = 'e', desc = 'Открыть файловый менеджер', action = ':NvimTreeToggle' },
-          { icon = ' ', key = 't', desc = 'Сменить тему', action = ':CatppuccinFlavour' },
+          { icon = '󰔎 ', key = 't', desc = 'Сменить тему', action = ':CatppuccinFlavour' },
           { icon = ' ', key = 'c', desc = 'Конфигурация', action = ':e $MYVIMRC' },
           { icon = ' ', key = 'u', desc = 'Обновить плагины', action = ':Lazy update' },
-          { icon = ' ', key = 'q', desc = 'Выйти из Neovim', action = ':qa' },
+          { icon = '󰈆 ', key = 'q', desc = 'Выйти из Neovim', action = ':qa' },
         },
         header = [[
   ███╗   ██╗██╗   ██╗    ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
