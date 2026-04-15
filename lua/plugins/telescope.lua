@@ -70,20 +70,20 @@ return {
     end
 
     local live = function()
-      builtin.live_grep { grep_open_files = true, prompt_title = 'Поиск-Grep в открытых файлах' }
+      builtin.live_grep { grep_open_files = true, prompt_title = 'Поиск в открытых файлах' }
     end
 
-    map('<leader>fh', wrapper(builtin.help_tags, 'Справка'), 'Поиск в справке')
-    map('<leader>fk', wrapper(builtin.keymaps, 'Горячие клавиши'), 'Поиск горячих клавиш')
-    map('<leader>ff', wrapper(builtin.find_files, 'Файлы'), 'Поиск файлов')
-    map('<leader>ft', wrapper(builtin.builtin, 'Telescope'), 'Поиск в Telescope')
-    map('<leader>fw', wrapper(builtin.grep_string, 'Слово под курсором'), 'Поиск слова под курсором')
-    map('<leader>fg', wrapper(builtin.live_grep, 'Слово'), 'Поиск слова')
-    map('<leader>fd', wrapper(builtin.diagnostics, 'Диагностика'), 'Поиск диагностики')
-    map('<leader>fb', wrapper(builtin.buffers, 'Буфферы'), 'Поиск буферов')
-    map('<leader>f.', wrapper(builtin.oldfiles, 'Недавние файлы'), 'Поиск в недавних файлах')
-    map('<leader>fo', live, 'Поиск-Grep в открытых файлах')
+    map('<leader>fh', wrapper(builtin.help_tags, 'Справка'), 'Справка')
+    map('<leader>fk', wrapper(builtin.keymaps, 'Горячие клавиши'), 'Горячие клавиши')
+    map('<leader>ff', wrapper(builtin.find_files, 'Файлы'), 'Файлы')
+    map('<leader>ft', wrapper(builtin.builtin, 'Telescope'), 'Команды Telescope')
+    map('<leader>fw', wrapper(builtin.grep_string, 'Слово под курсором'), 'Слово под курсором')
+    map('<leader>fg', wrapper(builtin.live_grep, 'Слово'), 'Поиск по содержимому')
+    map('<leader>fd', wrapper(builtin.diagnostics, 'Диагностика'), 'Диагностика')
+    map('<leader>fb', wrapper(builtin.buffers, 'Буферы'), 'Буферы')
+    map('<leader>f.', wrapper(builtin.oldfiles, 'Недавние файлы'), 'Недавние файлы')
+    map('<leader>fo', live, 'Поиск в открытых файлах')
     map('<leader>f/', fuzzy, 'Поиск в текущем буфере')
-    map('<leader>fr', builtin.resume, 'Продолжить поиск')
+    map('<leader>fr', builtin.resume, 'Повторить последний поиск')
   end,
 }

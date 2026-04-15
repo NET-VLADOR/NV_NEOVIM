@@ -36,10 +36,12 @@ return {
     opts = { signs = true },
   },
   {
-    'norcalli/nvim-colorizer.lua',
-    config = function()
-      require('colorizer').setup()
-    end,
+    'brenoprata10/nvim-highlight-colors',
+    event = 'VeryLazy',
+    opts = {
+      enable_named_colors = true,
+      enable_tailwind = false,
+    },
   },
   {
     'nvzone/showkeys',

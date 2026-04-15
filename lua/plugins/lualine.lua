@@ -8,38 +8,17 @@ return {
     local theme = require 'core.theme-manager'
 
     local function setup_lualine(palette)
-      local custom_catppuccin = {
-        normal = {
-          a = { bg = palette.mauve, fg = palette.crust, gui = 'bold' },
-          b = { bg = palette.surface0, fg = palette.text },
-          c = { bg = palette.base, fg = palette.subtext1 },
-        },
-        insert = {
-          a = { bg = palette.green, fg = palette.crust, gui = 'bold' },
-          b = { bg = palette.surface0, fg = palette.text },
-          c = { bg = palette.base, fg = palette.subtext1 },
-        },
-        visual = {
-          a = { bg = palette.peach, fg = palette.crust, gui = 'bold' },
-          b = { bg = palette.surface0, fg = palette.text },
-          c = { bg = palette.base, fg = palette.subtext1 },
-        },
-        replace = {
-          a = { bg = palette.red, fg = palette.crust, gui = 'bold' },
-          b = { bg = palette.surface0, fg = palette.text },
-          c = { bg = palette.base, fg = palette.subtext1 },
-        },
-        command = {
-          a = { bg = palette.yellow, fg = palette.crust, gui = 'bold' },
-          b = { bg = palette.surface0, fg = palette.text },
-          c = { bg = palette.base, fg = palette.subtext1 },
-        },
-        inactive = {
-          a = { bg = palette.surface1, fg = palette.overlay0 },
-          b = { bg = palette.surface1, fg = palette.overlay0 },
-          c = { bg = palette.base, fg = palette.overlay0 },
-        },
+      -- Используем встроенную тему Catppuccin для lualine, переопределяя только palette
+      local catppuccin_theme = require 'catppuccin.utils.lualine'()
+      catppuccin_theme.normal = {
+        a = { bg = palette.mauve, fg = palette.crust, gui = 'bold' },
+        b = { bg = palette.surface0, fg = palette.text },
+        c = { bg = palette.base, fg = palette.subtext1 },
       }
+      catppuccin_theme.insert.a = { bg = palette.green, fg = palette.crust, gui = 'bold' }
+      catppuccin_theme.visual.a = { bg = palette.peach, fg = palette.crust, gui = 'bold' }
+      catppuccin_theme.replace.a = { bg = palette.red, fg = palette.crust, gui = 'bold' }
+      catppuccin_theme.command.a = { bg = palette.yellow, fg = palette.crust, gui = 'bold' }
 
       local mode = {
         'mode',
@@ -91,7 +70,7 @@ return {
       require('lualine').setup {
         options = {
           icons_enabled = true,
-          theme = custom_catppuccin,
+          theme = catppuccin_theme,
           section_separators = { left = '', right = '' },
           component_separators = { left = '', right = '' },
           disabled_filetypes = { 'alpha' },

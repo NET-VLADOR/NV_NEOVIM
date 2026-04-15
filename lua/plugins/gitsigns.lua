@@ -26,14 +26,16 @@ return {
         vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'Git: ' .. desc })
       end
 
+      -- ═══════════════════════════════════════════════════════════
       -- 1. Навигация по изменениям
+      -- ═══════════════════════════════════════════════════════════
       map(']g', function()
         if vim.wo.diff then
           vim.cmd.normal { ']g', bang = true }
         else
           gitsigns.nav_hunk 'next'
         end
-      end, 'Следующее изменение (next hunk)')
+      end, 'Следующее изменение')
 
       map('[g', function()
         if vim.wo.diff then
@@ -41,58 +43,62 @@ return {
         else
           gitsigns.nav_hunk 'prev'
         end
-      end, 'Предыдущее изменение (prev hunk)')
+      end, 'Предыдущее изменение')
 
-      map('<leader>gh', gitsigns.select_hunk, 'Выделить текущий кусок (select hunk)')
+      map('<leader>gh', gitsigns.select_hunk, 'Выделить текущий блок')
 
+      -- ═══════════════════════════════════════════════════════════
       -- 2. Управление изменениями (стадия/сброс)
+      -- ═══════════════════════════════════════════════════════════
       -- Индивидуальные изменения
-      map('<leader>gs', gitsigns.stage_hunk, 'Добавить кусок в индекс (stage hunk)')
-      map('<leader>gr', gitsigns.reset_hunk, 'Отменить изменения в куске (reset hunk)')
+      map('<leader>gs', gitsigns.stage_hunk, 'Добавить блок в индекс')
+      map('<leader>gr', gitsigns.reset_hunk, 'Отменить изменения в блоке')
 
       -- Визуальный режим
       map('<leader>gs', function()
         gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-      end, 'Добавить выделение в индекс (stage hunk)', 'v')
+      end, 'Добавить выделение в индекс', 'v')
 
       map('<leader>gr', function()
         gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-      end, 'Отменить изменения в выделении (reset hunk)', 'v')
+      end, 'Отменить изменения в выделении', 'v')
 
       -- Весь файл
-      map('<leader>gS', gitsigns.stage_buffer, 'Добавить весь файл в индекс (stage buffer)')
-      map('<leader>gR', gitsigns.reset_buffer, 'Отменить все изменения в файле (reset buffer)')
-      map('<leader>gX', gitsigns.reset_buffer_index, 'Сбросить индекс буфера (reset buffer index)')
+      map('<leader>gS', gitsigns.stage_buffer, 'Добавить файл в индекс')
+      map('<leader>gR', gitsigns.reset_buffer, 'Отменить изменения в файле')
 
+      -- ═══════════════════════════════════════════════════════════
       -- 3. Просмотр изменений
-      map('<leader>gp', gitsigns.preview_hunk_inline, 'Просмотреть изменения в куске (inline preview)')
-      map('<leader>gP', gitsigns.preview_hunk, 'Просмотреть кусок во float-окне (float preview)')
-      map('<leader>gd', gitsigns.diffthis, 'Сравнить с индексом (diff index)')
+      -- ═══════════════════════════════════════════════════════════
+      map('<leader>gp', gitsigns.preview_hunk_inline, 'Предпросмотр блока (в строке)')
+      map('<leader>gP', gitsigns.preview_hunk, 'Предпросмотр блока (в окне)')
+      map('<leader>gd', gitsigns.diffthis, 'Сравнить с индексом')
       map('<leader>gD', function()
         gitsigns.diffthis '@'
-      end, 'Сравнить с последним коммитом (diff HEAD)')
-      map('<leader>gb', gitsigns.blame_line, 'Показать автора строки (blame line)')
-      map('<leader>gB', gitsigns.blame, 'Открыть blame в новом окне (full blame)')
+      end, 'Сравнить с последним коммитом')
+      map('<leader>gb', gitsigns.blame_line, 'Автор строки')
+      map('<leader>gB', gitsigns.blame, 'Полная история изменений')
 
-      -- 4. Переключение режимов отображения
-      map('<leader>tb', gitsigns.toggle_current_line_blame, 'Blame для строки (переключить)')
-      map('<leader>ts', gitsigns.toggle_signs, 'Знаки изменений (переключить)')
-      map('<leader>tn', gitsigns.toggle_numhl, 'Подсветка номеров строк (переключить)')
-      map('<leader>tl', gitsigns.toggle_linehl, 'Подсветка строк (переключить)')
-      map('<leader>tw', gitsigns.toggle_word_diff, 'Подсветка слов (переключить)')
+      -- ═══════════════════════════════════════════════════════════
+      -- 4. Переключение режимов отображения (группа T — toggle)
+      -- ═══════════════════════════════════════════════════════════
+      map('<leader>gt', gitsigns.toggle_current_line_blame, 'Переключить blame строки')
+      map('<leader>gTs', gitsigns.toggle_signs, 'Переключить знаки изменений')
+      map('<leader>gTn', gitsigns.toggle_numhl, 'Переключить подсветку номеров')
+      map('<leader>gTl', gitsigns.toggle_linehl, 'Переключить подсветку строк')
+      map('<leader>gTw', gitsigns.toggle_word_diff, 'Переключить подсветку слов')
+      map('<leader>gTd', gitsigns.toggle_deleted, 'Переключить удалённые строки')
 
+      -- ═══════════════════════════════════════════════════════════
       -- 5. Работа с историей и базой
+      -- ═══════════════════════════════════════════════════════════
       map('<leader>gx', function()
         gitsigns.change_base '~'
-      end, 'Сменить базу на HEAD~ (change base)')
-
-      map('<leader>gX', function()
-        gitsigns.change_base()
-      end, 'Сбросить базу сравнения (reset base)')
+      end, 'Сменить базу на HEAD~')
 
       map('<leader>gq', function()
         gitsigns.setqflist 'attached'
-      end, 'Показать все изменения в quickfix')
+      end, 'Показать все изменения')
     end,
   },
 }

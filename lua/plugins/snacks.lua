@@ -12,7 +12,7 @@ return {
           { icon = ' ', key = 'n', desc = 'Новый файл', action = ':ene | startinsert' },
           { icon = '󰈔 ', key = 'f', desc = 'Найти файл', action = ':Telescope find_files' },
           { icon = ' ', key = 'r', desc = 'Недавние файлы', action = ':Telescope oldfiles' },
-          { icon = ' ', key = 'e', desc = 'Открыть файловый менеджер', action = ':NvimTreeToggle' },
+          { icon = ' ', key = 'e', desc = 'Файловый менеджер', action = ':NvimTreeToggle' },
           { icon = '󰔎 ', key = 't', desc = 'Сменить тему', action = ':CatppuccinFlavour' },
           { icon = ' ', key = 'c', desc = 'Конфигурация', action = ':e $MYVIMRC' },
           { icon = ' ', key = 'u', desc = 'Обновить плагины', action = ':Lazy update' },
@@ -71,7 +71,12 @@ return {
     indent = { enabled = true },
     notifier = { enabled = true, style = 'fancy' },
     scroll = { enabled = true },
-    image = { enabled = true },
+    image = {
+      enabled = true,
+      doc = {
+        enabled = false,
+      },
+    },
     terminal = {
       win = {
         style = 'terminal',

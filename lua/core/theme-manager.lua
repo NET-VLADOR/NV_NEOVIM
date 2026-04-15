@@ -19,7 +19,6 @@ function M.setup()
       dropbar = { enabled = true, color_mode = true },
       mason = true,
       snacks = { enabled = true, indent_scope_color = 'text' },
-      neogit = true,
       noice = true,
       treesitter_context = true,
       which_key = true,

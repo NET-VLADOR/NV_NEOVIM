@@ -16,7 +16,7 @@ return {
   },
   config = function()
     vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+      group = vim.api.nvim_create_augroup('nv-lsp-attach', { clear = true }),
       callback = function(event)
         local map = function(keys, func, desc, mode)
           mode = mode or 'n'
@@ -32,22 +32,15 @@ return {
         map('<leader>ln', vim.lsp.buf.rename, 'Переименовать')
         map('<leader>la', vim.lsp.buf.code_action, 'Код-действия', { 'n', 'x' })
         map('<leader>lD', vim.lsp.buf.declaration, 'Перейти к объявлению')
-        map('K', vim.lsp.buf.hover, 'Показать документацию')
+        map('K', vim.lsp.buf.hover, 'Документация')
         map('<leader>th', function()
           vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
         end, 'Переключить подсказки в коде')
 
-        local function client_supports_method(client, method, bufnr)
-          if vim.fn.has 'nvim-0.11' == 1 then
-            return client:supports_method(method, bufnr)
-          else
-            return client.supports_method(method, { bufnr = bufnr })
-          end
-        end
-
+        -- Автоподсветка символов при наведении курсора
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-          local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+          local highlight_augroup = vim.api.nvim_create_augroup('nv-lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
             group = highlight_augroup,
@@ -61,10 +54,10 @@ return {
           })
 
           vim.api.nvim_create_autocmd('LspDetach', {
-            group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+            group = vim.api.nvim_create_augroup('nv-lsp-detach', { clear = true }),
             callback = function(event2)
               vim.lsp.buf.clear_references()
-              vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+              vim.api.nvim_clear_autocmds { group = 'nv-lsp-highlight', buffer = event2.buf }
             end,
           })
         end
