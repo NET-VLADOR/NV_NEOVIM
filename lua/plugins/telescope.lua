@@ -1,6 +1,20 @@
 return {
   'nvim-telescope/telescope.nvim',
-  event = 'VimEnter',
+  cmd = 'Telescope',
+  keys = {
+    { '<leader>fh', desc = 'Справка' },
+    { '<leader>fk', desc = 'Горячие клавиши' },
+    { '<leader>ff', desc = 'Файлы' },
+    { '<leader>ft', desc = 'Команды Telescope' },
+    { '<leader>fw', desc = 'Слово под курсором' },
+    { '<leader>fg', desc = 'Поиск по содержимому' },
+    { '<leader>fd', desc = 'Диагностика' },
+    { '<leader>fb', desc = 'Буферы' },
+    { '<leader>f.', desc = 'Недавние файлы' },
+    { '<leader>fo', desc = 'Поиск в открытых файлах' },
+    { '<leader>f/', desc = 'Поиск в текущем буфере' },
+    { '<leader>fr', desc = 'Повторить последний поиск' },
+  },
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
