@@ -81,27 +81,16 @@ return {
         sections = {
           lualine_a = { mode },
           lualine_b = {
-            {
-              'b:gitsigns_head',
-              icon = '',
-              color = { fg = palette.blue },
-            },
+            { 'b:gitsigns_head', icon = '', color = { fg = palette.blue } },
           },
           lualine_c = { filename },
           lualine_x = {
             diagnostics,
             diff,
             fileformat,
-            {
-              'encoding',
-              cond = hide_in_width,
-              color = { fg = palette.peach },
-            },
-            {
-              'filetype',
-              cond = hide_in_width,
-              color = { fg = palette.mauve },
-            },
+            { 'encoding', cond = hide_in_width, color = { fg = palette.peach } },
+            { 'filetype', cond = hide_in_width, color = { fg = palette.mauve } },
+            { 'lsp_status', cond = hide_in_width, color = { fg = palette.blue } },
           },
           lualine_y = {
             {
@@ -110,27 +99,17 @@ return {
             },
           },
           lualine_z = {
-            {
-              'progress',
-            },
+            { 'progress' },
           },
         },
         inactive_sections = {
           lualine_a = {},
           lualine_b = {},
           lualine_c = {
-            {
-              'filename',
-              path = 1,
-              color = { fg = palette.overlay1 },
-            },
+            { 'filename', path = 1, color = { fg = palette.overlay1 } },
           },
           lualine_x = {
-            {
-              'location',
-              padding = 0,
-              color = { fg = palette.overlay1 },
-            },
+            { 'location', padding = 0, color = { fg = palette.overlay1 } },
           },
         },
         tabline = {},
